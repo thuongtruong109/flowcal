@@ -5,7 +5,7 @@ import nodemailer from "nodemailer";
 import * as dotenv from "dotenv";
 dotenv.config();
 
-import { hashPassword, comparePassword } from "../../helpers/hash";
+import { hashPassword, comparePassword } from "../../utils/hash";
 import { confirmEmailMsg } from "../../helpers/email.helper";
 import { IRole, IUser } from "../../types";
 

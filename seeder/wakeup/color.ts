@@ -1,6 +1,6 @@
 import { Error } from "mongoose";
 
-import db from "../../models";
+import db from "../../src/models";
 
 const colors: Array<string> = [
   "#FFDCA2",

@@ -2,8 +2,8 @@ import { Request, Response, NextFunction } from "express";
 import * as dotenv from "dotenv";
 dotenv.config();
 
-import { HttpException } from "../exceptions/http.exception";
-import { logger } from "../loggers";
+import { HttpException } from "../helpers/exception.helper";
+import { logger } from "../configs/log.config";
 
 const ErrorHandler = (
   err: HttpException,

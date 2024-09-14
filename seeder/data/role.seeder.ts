@@ -1,4 +1,4 @@
-import { IRole } from "../src/types";
+import { IRole } from "../../src/types";
 
 const seedRoles: Array<IRole> = [
   {

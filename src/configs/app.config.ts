@@ -13,7 +13,7 @@ import { IRouter } from "../types";
 import morgan from "morgan";
 import ErrorHandler from "../middlewares/error.middleware";
 import { rateLimiterMiddleware } from "../middlewares/rate.middleware";
-import { capitializeString } from "../utils/string";
+import { capitializeString } from "../utils";
 
 class App {
   public app: express.Application;

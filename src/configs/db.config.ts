@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import * as dotenv from "dotenv";
 dotenv.config();
 
-import init from "../helpers/wakeup";
+// import init from "../helpers/wakeup";
 
 function ConnectDB() {
   const options: any = {

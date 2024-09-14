@@ -1,6 +1,6 @@
 import crypto from "node:crypto";
 
-const hashPassword = async (
+export const hashPassword = async (
   password: string
 ): Promise<{ hash: string; salt: string }> => {
   let salt = crypto.randomBytes(16).toString("hex");
@@ -10,7 +10,7 @@ const hashPassword = async (
   return { hash, salt };
 };
 
-const comparePassword = async (
+export const comparePassword = async (
   password: string,
   hashed: string,
   salt: string
@@ -21,5 +21,3 @@ const comparePassword = async (
 
   return hash === hashed;
 };
-
-export { hashPassword, comparePassword };
