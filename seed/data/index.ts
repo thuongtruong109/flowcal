@@ -11,7 +11,7 @@ import seedCards from "./card.seeder";
 async function seedDB() {
   const uri = process.env.MONGO_URL;
   const database = process.env.DB_NAME;
-  const options: any = {
+  const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   };

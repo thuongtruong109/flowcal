@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import * as dotenv from "dotenv";
 dotenv.config();
 
-// import init from "../helpers/wakeup";
+import init from "./seed";
 
 function ConnectDB() {
   const options: any = {
@@ -12,16 +12,16 @@ function ConnectDB() {
 
   mongoose.set("strictQuery", true);
   mongoose.connect(`${process.env.MONGO_URL}`, options);
-  // init();
+  init();
 }
 
 const connect = mongoose.connection;
 
 connect.on("error", (err): void => {
-  console.error.bind(console, "• MongoDB::: connection error ");
+  console.error.bind(console, "• MongoDB ::: connection error ");
   connect.close().catch(() => {
     console.log(
-      `• MongoDB::: failed to closed connection  ${JSON.stringify(err)}`
+      `• MongoDB ::: failed to closed connection  ${JSON.stringify(err)}`
     );
   });
 });
@@ -33,7 +33,7 @@ connect.on("open", (): void => {
 connect.on("connected", (): void => {
   mongoose.set("debug", (col: string, method: string, query, doc) => {
     console.log(
-      `• MongoDB::: Query executed ${col} - ${method} - ${JSON.stringify(
+      `• MongoDB ::: Query executed ${col} - ${method} - ${JSON.stringify(
         query
       )} - ${JSON.stringify(doc)})`
     );
@@ -43,4 +43,5 @@ connect.on("connected", (): void => {
 connect.on("disconnected", (err): void => {
   console.log(`• Database disconnected ${JSON.stringify(err)}`);
 });
+
 export default ConnectDB;

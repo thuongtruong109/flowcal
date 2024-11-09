@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   app: &app
-    image: ghcr.io/thuongtruong1009/metasave:main
+    image: thuongtruong1009/boardly:latest
     build:
       context: .
       dockerfile: ./docker/Dockerfile
@@ -11,7 +11,6 @@ services:
       - .:/app
     networks:
       - mongo_network
-      - ngrok_network
       - nginx_network
     depends_on:
       - mongo
@@ -56,26 +55,6 @@ services:
       - mongo_network
     restart: unless-stopped
 
-  ngrok:
-    container_name: ngrok
-    image: wernight/ngrok
-    environment:
-      - NGROK_AUTH=${NGROK_AUTH}
-      - NGROK_CONFIG=/ngrok.yaml
-    volumes:
-      - ./docker/ngrok/data:/home/ngrok/.ngrok2/
-    # command: /home/ngrok/.ngrok2/ http nginx:80 -config=/app/ngrok.yml
-    # command: http -authtoken ${NGROK_AUTH} host.docker.internal:${APP_PORT}
-    command: ngrok http host.docker.internal:${APP_PORT}
-    ports:
-      - 4040:4040
-    networks:
-      - ngrok_network
-    depends_on:
-      - app
-    restart: unless-stopped
-
 networks:
   mongo_network:
-  ngrok_network:
   nginx_network:
