@@ -3,7 +3,7 @@ dotenv.config();
 
 export const envConf = {
   NODE_ENV: process.env.NODE_ENV || "development",
-  PORT: process.env.PORT ? Number.parseInt(process.env.PORT) : 3000,
+  PORT: process.env.APP_PORT ? Number.parseInt(process.env.APP_PORT) : 3000,
   APP_URL: process.env.APP_URL || "http://localhost:3000",
   CORS_ORIGIN: process.env.CORS_ORIGIN
     ? process.env.CORS_ORIGIN.split(",")
@@ -23,10 +23,11 @@ export const envConf = {
   ACCESS_TOKEN_KEY: process.env.ACCESS || "access-token",
   ACCESS_TOKEN_LIFE: process.env.ACCESS_TOKEN_LIFE || "1h",
   REFRESH_TOKEN_KEY: process.env.REFRESH_TOKEN_KEY || "refresh-token",
-  REFRESH_TOKEN_LIFE: process.env.REFRESH_TOKEN_LIFE || "1d",
+  REFRESH_TOKEN_LIFE: process.env.REFRESH_TOKEN_LIFE || "7d",
 
   EMAIL_USERNAME: process.env.EMAIL_USERNAME,
   EMAIL_PASSWORD: process.env.EMAIL_PASSWORD,
+
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
   GOOGLE_REFRESH_TOKEN: process.env.GOOGLE_REFRESH_TOKEN,

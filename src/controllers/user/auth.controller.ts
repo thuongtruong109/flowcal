@@ -2,8 +2,6 @@ import { Request, Response } from "express";
 import { Error } from "mongoose";
 import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
-import * as dotenv from "dotenv";
-dotenv.config();
 
 import { hashPassword, comparePassword } from "@/utils/hash";
 import { confirmEmailMsg } from "@/helpers/email.helper";
@@ -96,11 +94,11 @@ function sendConfirmationEmail(email: string) {
     service: "gmail",
     auth: {
       type: "OAuth2",
-      user: process.env.EMAIL_USERNAME,
-      pass: process.env.EMAIL_PASSWORD,
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
+      user: envConf.EMAIL_USERNAME,
+      pass: envConf.EMAIL_PASSWORD,
+      clientId: envConf.GOOGLE_CLIENT_ID,
+      clientSecret: envConf.GOOGLE_CLIENT_SECRET,
+      refreshToken: envConf.GOOGLE_REFRESH_TOKEN,
     },
   } as any);
 
