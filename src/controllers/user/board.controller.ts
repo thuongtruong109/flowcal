@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import cardController from "./card.controller";
 import * as object from "mongoose";
-const ObjectId = object.Types.ObjectId;
-import db from "../../models";
+import db from "@/models";
 
+const ObjectId = object.Types.ObjectId;
 const Project = db.project;
 const Board = db.board;
 const Card = db.card;

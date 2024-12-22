@@ -1,4 +1,4 @@
-name: Publish
+name: CD
 
 on:
   push:
@@ -15,8 +15,7 @@ on:
       - "**.json"
 
 jobs:
-  push_to_registries:
-    name: Publish image to container registry
+  publish:
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -38,15 +37,15 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.PAT }}
 
-      - name: Extract metadata (tags, labels) for Docker
+      - name: Extract metadata
         id: meta
         uses: docker/metadata-action@v4
         with:
           images: |
-            thuongtruong1009/metasave-api
+            ${{ secrets.DOCKER_USERNAME }}/boardly-api
             ghcr.io/${{ github.repository }}
 
-      - name: Build and push Docker images
+      - name: Build and push images
         uses: docker/build-push-action@v3
         with:
           context: .

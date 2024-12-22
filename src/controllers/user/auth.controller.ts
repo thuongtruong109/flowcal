@@ -5,11 +5,12 @@ import nodemailer from "nodemailer";
 import * as dotenv from "dotenv";
 dotenv.config();
 
-import { hashPassword, comparePassword } from "../../utils/hash";
-import { confirmEmailMsg } from "../../helpers/email.helper";
-import { IRole, IUser } from "../../types";
+import { hashPassword, comparePassword } from "@/utils/hash";
+import { confirmEmailMsg } from "@/helpers/email.helper";
+import { IRole, IUser } from "@/types";
 
-import db from "../../models";
+import db from "@/models";
+import { envConf } from "@/configs/env.config";
 const User = db.user;
 const Role = db.role;
 
@@ -78,17 +79,15 @@ const signup = async (req: Request, res: Response) => {
 const generateAccessToken = (user: IUser) => {
   return jwt.sign(
     { id: user.id, email: user.email },
-    `${process.env.ACCESS_TOKEN_KEY}`,
-    { expiresIn: `${process.env.ACCESS_TOKEN_LIFE}` }
+    envConf.ACCESS_TOKEN_KEY,
+    { expiresIn: envConf.ACCESS_TOKEN_LIFE }
   );
 };
 
 const generateRefreshToken = (user: IUser) => {
-  return jwt.sign(
-    { id: user, email: user.email },
-    `${process.env.REFRESH_TOKEN_KEY}`,
-    { expiresIn: `${process.env.REFRESH_TOKEN_LIFE}` }
-  );
+  return jwt.sign({ id: user, email: user.email }, envConf.REFRESH_TOKEN_KEY, {
+    expiresIn: envConf.REFRESH_TOKEN_LIFE,
+  });
 };
 
 //https://www.freecodecamp.org/news/use-nodemailer-to-send-emails-from-your-node-js-server/
@@ -105,7 +104,7 @@ function sendConfirmationEmail(email: string) {
     },
   } as any);
 
-  let token = jwt.sign({ email }, `${process.env.SECRET_KEY}`);
+  let token = jwt.sign({ email }, envConf.SECRET_KEY);
 
   return transporter.sendMail(confirmEmailMsg(email, token), (err, info) => {
     if (err) {
@@ -121,7 +120,7 @@ const verifyAccount = (req: Request, res: Response) => {
   try {
     const payload = jwt.verify(
       req.params.token,
-      `${process.env.ACCESS_TOKEN_SECRET}`
+      envConf.ACCESS_TOKEN_SECRET
     ) as any;
     email = payload.email;
   } catch {
@@ -209,29 +208,25 @@ const refreshToken = (req: Request, res: Response) => {
   if (!refreshTokens.includes(refreshToken))
     return res.status(403).send({ message: "Refresh token is not valid!" });
 
-  jwt.verify(
-    refreshToken,
-    `${process.env.REFRESH_TOKEN_KEY}`,
-    (err: any, user: any) => {
-      if (err)
-        return res.status(403).send({ message: "Refresh token is not valid!" });
+  jwt.verify(refreshToken, envConf.REFRESH_TOKEN_KEY, (err: any, user: any) => {
+    if (err)
+      return res.status(403).send({ message: "Refresh token is not valid!" });
 
-      refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
+    refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
 
-      const newAccessToken = generateAccessToken(user);
-      const newRefreshToken = generateRefreshToken(user);
-      refreshTokens.push(newRefreshToken);
-      res.cookie("refreshToken", newRefreshToken, {
-        httpOnly: true,
-        maxAge: 1000 * 60 * 60 * 24 * 365,
-        sameSite: "strict",
-        path: "/",
-        secure: true,
-      });
+    const newAccessToken = generateAccessToken(user);
+    const newRefreshToken = generateRefreshToken(user);
+    refreshTokens.push(newRefreshToken);
+    res.cookie("refreshToken", newRefreshToken, {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 365,
+      sameSite: "strict",
+      path: "/",
+      secure: true,
+    });
 
-      res.status(200).send({ accessToken: newAccessToken });
-    }
-  );
+    res.status(200).send({ accessToken: newAccessToken });
+  });
 };
 
 const logout = (req: Request, res: Response) => {

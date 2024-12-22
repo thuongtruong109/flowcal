@@ -1,11 +1,11 @@
 import { Error } from "mongoose";
 import db from "../models";
-import { ECATEGORY, ECOLOR, EROLE, ETAG } from "../constants";
+import { CATEGORY_CONST, COLOR_CONST, ROLE_CONST, TAG_CONST } from "../constants";
 
 function initTag() {
   db.tag.estimatedDocumentCount((err: Error | null, count: number) => {
     if (!err && count === 0) {
-      ETAG.forEach((tag: string) => {
+      TAG_CONST.forEach((tag: string) => {
         new db.tag({
           name: tag,
         }).save((err: Error | null) => {
@@ -22,7 +22,7 @@ function initTag() {
 function initRole() {
   db.role.estimatedDocumentCount((err: Error | null, count: number) => {
     if (!err && count === 0) {
-      EROLE.forEach((role: string) => {
+      ROLE_CONST.forEach((role: string) => {
         new db.role({
           name: role,
         }).save((err: Error | null) => {
@@ -39,7 +39,7 @@ function initRole() {
 function initCategory() {
   db.category.estimatedDocumentCount((err: Error | null, count: number) => {
     if (!err && count === 0) {
-      ECATEGORY.forEach((category: string) => {
+      CATEGORY_CONST.forEach((category: string) => {
         new db.category({
           name: category,
         }).save((err: Error | null) => {
@@ -56,7 +56,7 @@ function initCategory() {
 function initColor() {
     db.color.estimatedDocumentCount((err: Error | null, count: number) => {
       if (!err && count === 0) {
-        ECOLOR.forEach((color: string) => {
+        COLOR_CONST.forEach((color: string) => {
           new db.color({
             name: `${color}`,
           }).save((err: Error | null) => {
@@ -70,7 +70,7 @@ function initColor() {
     console.log("-> seeding successfully for color collection");
   }
 
-export default function init() {
+export default function initSampleSeed() {
     initColor();
     initRole();
     initTag();

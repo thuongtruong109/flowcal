@@ -1,3 +1,4 @@
+import { E_COLLECTION } from "../enums";
 import mongoose from "mongoose";
 
 interface ITagModel extends mongoose.Document {
@@ -12,11 +13,11 @@ const tagSchema: mongoose.Schema = new mongoose.Schema({
   },
   color: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Color",
+    ref: E_COLLECTION.COLOR,
     required: true,
   },
 });
 
-const TagModel = mongoose.model<ITagModel>("Tag", tagSchema);
+const TagModel = mongoose.model<ITagModel>(E_COLLECTION.TAG, tagSchema);
 
 export default TagModel;

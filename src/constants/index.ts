@@ -1,8 +1,8 @@
-export const ECATEGORY: Array<string> = ["kanban", "todo", "custom"];
+export const CATEGORY_CONST: Array<string> = ["kanban", "todo", "custom"];
 
-export const EROLE: Array<string> = ["USER", "ADMIN", "MODERATOR"];
+export const ROLE_CONST: Array<string> = ["USER", "ADMIN", "MODERATOR"];
 
-export const ETAG: Array<string> = [
+export const TAG_CONST: Array<string> = [
     "family",
     "work",
     "study",
@@ -11,7 +11,7 @@ export const ETAG: Array<string> = [
     "secret",
 ];
 
-export const ECOLOR: Array<string> = [
+export const COLOR_CONST: Array<string> = [
     "#FFDCA2",
     "#E4C7B7",
     "#BCE6FF",

@@ -1,12 +1,11 @@
 import { Response, NextFunction } from "express";
 import { Error } from "mongoose";
-import * as dotenv from "dotenv";
-dotenv.config();
 
-import { IDecoded, IRole, IUser } from "../types";
+import { IDecoded, IRole, IUser } from "@/types";
 import jwt from "jsonwebtoken";
 
-import db from "../models";
+import db from "@/models";
+import { envConf } from "@/configs/env.config";
 const User = db.user;
 const Role = db.role;
 
@@ -27,7 +26,7 @@ const verifyToken = (req: any, res: Response, next: NextFunction) => {
 
     jwt.verify(
       accessToken,
-      `${process.env.ACCESS_TOKEN_KEY}`,
+      envConf.ACCESS_TOKEN_KEY,
       (err: Error | null, decoded: IDecoded | any) => {
         if (err) {
           return res.status(401).send({ message: "Unauthorized!" });

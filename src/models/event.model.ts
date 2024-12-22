@@ -1,3 +1,4 @@
+import { E_COLLECTION } from "../enums";
 import mongoose from "mongoose";
 
 interface IEventModel extends mongoose.Document {
@@ -17,7 +18,7 @@ interface IEventModel extends mongoose.Document {
 const eventSchema: mongoose.Schema = new mongoose.Schema({
   organizer: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: E_COLLECTION.USER,
     required: true,
   },
   title: {
@@ -49,17 +50,17 @@ const eventSchema: mongoose.Schema = new mongoose.Schema({
   attendees: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: E_COLLECTION.USER,
       default: [],
     },
   ],
   colorId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Color",
+    ref: E_COLLECTION.COLOR,
     required: true,
   },
 }).set("timestamps", true);
 
-const EventModel = mongoose.model<IEventModel>("Event", eventSchema);
+const EventModel = mongoose.model<IEventModel>(E_COLLECTION.EVENT, eventSchema);
 
 export default EventModel;

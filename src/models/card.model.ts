@@ -1,3 +1,4 @@
+import { E_COLLECTION } from "../enums";
 import mongoose from "mongoose";
 
 interface ICardModel extends mongoose.Document {
@@ -13,7 +14,7 @@ interface ICardModel extends mongoose.Document {
 const cardSchema: mongoose.Schema = new mongoose.Schema({
   boardId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Board",
+    ref: E_COLLECTION.BOARD,
     required: true,
   },
   type: {
@@ -38,12 +39,12 @@ const cardSchema: mongoose.Schema = new mongoose.Schema({
   },
   tagId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Tag",
+    ref: E_COLLECTION.TAG,
     required: false,
     default: "639ee0c235daa8e2541b1cf8",
   },
 }).set("timestamps", true);
 
-const CardModel = mongoose.model<ICardModel>("Card", cardSchema);
+const CardModel = mongoose.model<ICardModel>(E_COLLECTION.CARD, cardSchema);
 
 export default CardModel;

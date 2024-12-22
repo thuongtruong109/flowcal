@@ -1,3 +1,3 @@
-export * from "./option";
-export * from "./role";
-export * from "./user";
+export * from "@/types/option";
+export * from "@/types/role";
+export * from "@/types/user";

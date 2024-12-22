@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import CardModel from "../../models/card.model";
+import CardModel from "@/models/card.model";
 
-import db from "../../models";
+import db from "@/models";
 const User = db.user;
 const Project = db.project;
 const Board = db.board;

@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
-import * as dotenv from "dotenv";
-dotenv.config();
-
-import init from "./seed";
+import { envConf } from "@/configs/env.config";
+import initSampleSeed from "@/configs/seed";
 
 function ConnectDB() {
   const options: any = {
@@ -11,8 +9,9 @@ function ConnectDB() {
   };
 
   mongoose.set("strictQuery", true);
-  mongoose.connect(`${process.env.MONGO_URL}`, options);
-  init();
+  mongoose.connect(envConf.MONGO_URL, options);
+
+  initSampleSeed();
 }
 
 const connect = mongoose.connection;

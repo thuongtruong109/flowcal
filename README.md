@@ -1,45 +1,68 @@
-## Demo
+# 🚀 Boardly
 
-- [Metasave client](metasave.vercel.app)
+[![CD](https://github.com/thuongtruong109/boardly/actions/workflows/cd.yml/badge.svg)](https://github.com/thuongtruong109/boardly/actions/workflows/cd.yml)
 
-- [Metasave server api](metasave.up.railway.app)
+<!-- [![Test](https://github.com/thuongtruong109/boardly/actions/workflows/test.yml/badge.svg)](https://github.com/thuongtruong109/boardly/actions/workflows/test.yml)
+[![Code Quality](https://github.com/thuongtruong109/boardly/actions/workflows/code-quality.yml/badge.svg)](https://github.com/thuongtruong109/boardly/actions/workflows/code-quality.yml)
+[![Docker Image CI](https://github.com/thuongtruong109/boardly/actions/workflows/docker-image.yml/badge.svg)](https://github.com/thuongtruong109/boardly/actions/workflows/docker-image.yml) -->
 
-- [Metasave server api docs](metasave.up.railway.app/docs)
+```code
+Hey There! 🙌
+🤾 that ⭐️ button if you like this boilerplate.
+```
 
-# TypeScript + Node + Docker (with code hot-reloading in the container)
+<!-- ## 🌟 Introduction
 
-## For running locally
+Welcome to the Express TypeScript Boilerplate 2024 – a streamlined, efficient, and scalable foundation for building powerful backend services with modern tools and practices in Express.js and TypeScript. -->
 
-`npm i`
+## 💡 Motivation
 
-### Start the dev server
+This boilerplate aims to:
 
-`npm run dev`
+- ✨ Reduce setup time for new projects
+- 📊 Ensure code consistency and quality
+- ⚡ Facilitate rapid development
+- 🛡️ Encourage best practices in security, testing, and performance
 
-### Build the project
+## 🚀 Features
 
-`npm run build`
+- 📁 Modular Structure: Organized by feature for easy navigation and scalability
+- 💨 Faster Execution with tsx: Rapid TypeScript execution with `tsx` and type checking with `tsc`
+- 🌐 Stable Node Environment: Latest LTS Node version in `.nvmrc`
+- 🔧 Simplified Environment Variables: Managed with Envalid
+- 🔗 Path Aliases: Cleaner code with shortcut imports
+- 🔄 Renovate Integration: Automatic updates for dependencies
+- 🔒 Security: Helmet for HTTP header security and CORS setup
+- 📊 Logging: Efficient logging with `pino-http`
+- 🧪 Comprehensive Testing: Setup with Vitest and Supertest
+- 🔑 Code Quality Assurance: Husky and lint-staged for consistent quality
+- ✅ Unified Code Style: `Biomejs` for consistent coding standards
+- 📃 API Response Standardization: `ServiceResponse` class for consistent API responses
+- 🐳 Docker Support: Ready for containerization and deployment
+- 📝 Input Validation with Zod: Strongly typed request validation using `Zod`
+- 🧩 Swagger UI: Interactive API documentation generated from Zod schemas
 
-### Start built project
+## 🛠️ Getting Started
 
-`npm start`
+#### Step 1: 🚀 Initial Setup
 
-## For running Docker Containers
+- Clone the repository: `git clone https://github.com/thuongtruong109/boardly.git`
+- Navigate: `cd boardly`
+- Install dependencies: `npm ci`
 
-_You'll need docker installed on your machine to run this in case you didn't know!_
+#### Step 2: ⚙️ Environment Configuration
 
-### Build the image
+- Create `.env`: Copy `.env.example` to `.env`
+- Update `.env`: Fill in necessary environment variables
 
-`docker-compose build`
+#### Step 3: 🏃‍♂️ Running the Project
 
-### Start the dev server
+- Development Mode: `npm run dev`
+- Building: `npm run build`
+- Production Mode: Set `.env` to `NODE_ENV="production"` then `npm run build && npm run start`
 
-`make up`
+## 🤝 Feedback and Contributions
 
-### Stop the server
+We'd love to hear your feedback and suggestions for further improvements. Feel free to contribute and join us in making backend development cleaner and faster!
 
-`make down`
-
-### Build and start production build
-
-`make up-prod`
+🎉 Happy coding!

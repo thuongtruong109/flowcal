@@ -12,7 +12,19 @@ import EventModel from "./event.model";
 
 mongoose.Promise = global.Promise;
 
-const db: any = {
+type IModel = {
+  user: typeof UserModel;
+  role: typeof RoleModel;
+  project: typeof ProjectModel;
+  tag: typeof TagModel;
+  board: typeof BoardModel;
+  card: typeof CardModel;
+  color: typeof ColorModel;
+  category: typeof CategoryModel;
+  event: typeof EventModel;
+};
+
+const db: IModel = {
   user: UserModel,
   role: RoleModel,
   project: ProjectModel,

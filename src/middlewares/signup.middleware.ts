@@ -1,12 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import { Error } from "mongoose";
-import { IUser } from "../types";
-import { EROLE } from "../constants";
+import { IUser } from "@/types";
+import { ROLE_CONST } from "@/constants";
 
-import db from "../models";
+import db from "@/models";
 
 const User = db.user;
-const ROLES = EROLE;
 
 const checkDuplicateUsernameOrEmail = (
   req: Request,
@@ -47,7 +46,7 @@ const checkDuplicateUsernameOrEmail = (
 const checkRolesExisted = (req: Request, res: Response, next: NextFunction) => {
   if (req.body.roles) {
     for (let i = 0; i < req.body.roles.length; i++) {
-      if (!ROLES.includes(req.body.roles[i])) {
+      if (!ROLE_CONST.includes(req.body.roles[i])) {
         res.status(400).send({
           message: `Failed! Role ${req.body.roles[i]} does not exist! `,
         });

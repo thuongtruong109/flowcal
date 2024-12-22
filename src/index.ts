@@ -1,16 +1,18 @@
-import App from "./configs/app.config";
+import "module-alias/register";
 
-import StatisticalRouter from "./routes/admin/statistical.router";
-import UsersRouter from "./routes/admin/users.router";
-import TagsRouter from "./routes/admin/tags.router";
-import ColorsRouter from "./routes/admin/colors.router";
+import App from "@/configs/app.config";
 
-import AuthRouter from "./routes/user/auth.router";
-import SettingRouter from "./routes/user/setting.router";
-import ProjectRouter from "./routes/user/project.router";
-import BoardRouter from "./routes/user/board.router";
-import CardRouter from "./routes/user/card.router";
-import EventRouter from "./routes/user/event.router";
+import StatisticalRouter from "@/routes/admin/statistical.router";
+import UsersRouter from "@/routes/admin/users.router";
+import TagsRouter from "@/routes/admin/tags.router";
+import ColorsRouter from "@/routes/admin/colors.router";
+
+import AuthRouter from "@/routes/user/auth.router";
+import SettingRouter from "@/routes/user/setting.router";
+import ProjectRouter from "@/routes/user/project.router";
+import BoardRouter from "@/routes/user/board.router";
+import CardRouter from "@/routes/user/card.router";
+import EventRouter from "@/routes/user/event.router";
 
 const app = new App(
   [
@@ -31,4 +33,5 @@ const app = new App(
 
 app.listen();
 
-export default app;
+process.on("SIGINT", app.onCloseSignal);
+process.on("SIGTERM", app.onCloseSignal);

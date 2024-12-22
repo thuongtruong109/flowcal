@@ -1,11 +1,9 @@
-import { Request, Response, NextFunction } from "express";
-import * as dotenv from "dotenv";
-dotenv.config();
+import { Request, Response, NextFunction, ErrorRequestHandler } from "express";
 
-import { HttpException } from "../helpers/exception.helper";
-import { logger } from "../configs/log.config";
+import { HttpException } from "@/helpers/exception.helper";
+import { logger } from "@/configs/log.config";
 
-const ErrorHandler = (
+const ErrorHandler: ErrorRequestHandler = (
   err: HttpException,
   req: Request,
   res: Response,
@@ -21,7 +19,7 @@ const ErrorHandler = (
       success: false,
       status: errStatus,
       message: errMsg,
-      stack: process.env.NODE_ENV === "development" ? err.stack : {},
+      stack: err.stack || "No stack defined",
     });
   } catch (error) {
     next(error);

@@ -1,3 +1,4 @@
+import { E_COLLECTION } from "../enums";
 import mongoose from "mongoose";
 
 interface IBoardModel extends mongoose.Document {
@@ -13,7 +14,7 @@ interface IBoardModel extends mongoose.Document {
 const boardSchema: mongoose.Schema = new mongoose.Schema({
   projectId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Project",
+    ref: E_COLLECTION.PROJECT,
     required: true,
   },
   name: {
@@ -30,7 +31,7 @@ const boardSchema: mongoose.Schema = new mongoose.Schema({
   },
   background: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Color",
+    ref: E_COLLECTION.COLOR,
     required: true,
   },
   customBackground: {
@@ -40,11 +41,11 @@ const boardSchema: mongoose.Schema = new mongoose.Schema({
   cards: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Card",
+      ref: E_COLLECTION.CARD,
     },
   ],
 }).set("timestamps", true);
 
-const BoardModel = mongoose.model<IBoardModel>("Board", boardSchema);
+const BoardModel = mongoose.model<IBoardModel>(E_COLLECTION.BOARD, boardSchema);
 
 export default BoardModel;

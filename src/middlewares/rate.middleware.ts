@@ -1,9 +1,10 @@
+import { envConf } from "@/configs/env.config";
 import rateLimit from "express-rate-limit";
 
 export const rateLimiterMiddleware = rateLimit({
-  windowMs: 1 * 60 * 1000,
-  max: 100,
-  message: "Too many requests from this IP, please try again after 60 seconds!",
+  max: envConf.RATE_LIMIT_MAX_REQUESTS,
+  legacyHeaders: true,
+  message: "Too many requests, please try again after 60 seconds!",
   standardHeaders: true,
-  legacyHeaders: false,
+  windowMs: envConf.RATE_LIMIT_WINDOW_MS * 60 * 1000,
 });

@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { IRouter } from "../../types";
-import CardController from "../../controllers/user/card.controller";
-import verifyAuth from "../../middlewares/authen.middleware";
+import { IRouter } from "@/types";
+import CardController from "@/controllers/user/card.controller";
+import verifyAuth from "@/middlewares/authen.middleware";
 
 class CardRouter implements IRouter {
   public path = "/card";

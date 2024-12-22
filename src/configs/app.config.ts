@@ -2,73 +2,64 @@ import compression from "compression";
 import cookieParser from "cookie-parser";
 import fs from "fs-extra";
 import cors from "cors";
-import express, { Request, Response } from "express";
+import express, { Request, Response, type Express } from "express";
 import path from "node:path";
 import helmet from "helmet";
 import hpp from "hpp";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
-import ConnectDB from "./db.config";
-import { IRouter } from "../types";
+import ConnectDB from "@/configs/db.config";
+import { IRouter } from "@/types";
 import morgan from "morgan";
-import ErrorHandler from "../middlewares/error.middleware";
-import { rateLimiterMiddleware } from "../middlewares/rate.middleware";
-import { capitializeString } from "../utils";
+import ErrorHandler from "@/middlewares/error.middleware";
+import { rateLimiterMiddleware } from "@/middlewares/rate.middleware";
+import { capitializeString } from "@/utils";
+import pino, { Logger } from "pino";
+import { envConf } from "@/configs/env.config";
+import { Server } from "node:http";
 
 class App {
-  public app: express.Application;
-  public env: string;
-  public port: string;
+  public app: Express;
+  public logger: Logger;
+  private _signal = {} as Server;
 
   constructor(userRoutes: IRouter[], adminRoutes: IRouter[]) {
     this.app = express();
-    this.env = `${process.env.NODE_ENV}`;
-    this.port = `${process.env.APP_PORT}`;
-
-    this.initializeMiddlewares();
-    this.initializeRoutes(userRoutes, adminRoutes);
-    this.initializeSwagger();
+    this.logger = pino({ name: "Logger" });
+    this._initMiddlewares();
+    this._initRoutes(userRoutes, adminRoutes);
+    this._initSwagger();
     ConnectDB();
-    this.initializeErrorHandling();
   }
 
-  public listen() {
-    try {
-      this.app.listen(this.port, () => {
-        console.log(`• App listening on the port ${this.port}`);
-      });
-    } catch (error) {
-      console.log("• Cannot connect to the server");
-    }
-    this.app.get("/", (req: Request, res: Response) => {
-      res.send("Hello World!");
-    });
+  private _writeLogs(fileName: string) {
+    const accessLogStream = fs.createWriteStream(
+      path.join(__dirname, `../../logs/${fileName}.log`),
+      { flags: "a" }
+    );
+    return accessLogStream;
   }
 
-  public getServer() {
-    return this.app;
-  }
-
-  private corsOptions() {
-    const options = {
-      origin: `${process.env.ORIGIN}`.split(","),
-      allowedHeaders: [
-        "Origin",
-        "X-Requested-With",
-        "Content-Type",
-        "Accept",
-        "X-Access-Token",
-        "Authorization",
-      ],
-      credentials: true,
-      methods: "GET,PUT,PATCH,POST,DELETE",
-      optionsSuccessStatus: 200,
-    };
-    return options;
-  }
-
-  private initializeMiddlewares() {
-    this.app.use(cors<Request>(this.corsOptions()));
+  private _initMiddlewares() {
+    this.app.disable("x-powered-by");
+    this.app.disable("etag");
+    this.app.set("trust proxy", true);
+    this.app.use(
+      cors<Request>({
+        origin: envConf.CORS_ORIGIN,
+        allowedHeaders: [
+          "Origin",
+          "X-Requested-With",
+          "Content-Type",
+          "Accept",
+          "X-Access-Token",
+          "Authorization",
+        ],
+        credentials: true,
+        methods: "GET,PUT,PATCH,POST,DELETE",
+        optionsSuccessStatus: 200,
+      })
+    );
     this.app.use(hpp());
     this.app.use(helmet());
     this.app.use(helmet.noSniff());
@@ -90,22 +81,13 @@ class App {
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(cookieParser());
     this.app.use(rateLimiterMiddleware);
-    this.app.use(morgan("combined", { stream: this.writeLogs("access") }));
-    this.app.disable("x-powered-by");
-    this.app.disable("etag");
-
+    this.app.use(morgan("combined", { stream: this._writeLogs("access") }));
     this.app.use(express.static(path.join(__dirname, "../../public")));
+
+    this.app.use(ErrorHandler);
   }
 
-  private writeLogs(fileName: string) {
-    const accessLogStream = fs.createWriteStream(
-      path.join(__dirname, `../../logs/${fileName}.log`),
-      { flags: "a" }
-    );
-    return accessLogStream;
-  }
-
-  private initializeRoutes(userRoutes: IRouter[], adminRoutes: IRouter[]) {
+  private _initRoutes(userRoutes: IRouter[], adminRoutes: IRouter[]) {
     userRoutes.forEach((route: IRouter) => {
       this.app.use("/api", route.router);
     });
@@ -114,25 +96,24 @@ class App {
     });
   }
 
-  private initializeSwagger() {
+  private _initSwagger() {
     const options = {
       swaggerDefinition: {
         info: {
-          title: `${capitializeString(process.env.DB_NAME)} - API`,
+          title: capitializeString(envConf.DB_NAME),
           version: "1.0.0",
-          description: `The API documentation for ${process.env.DB_NAME} server`,
+          description: `The API documentation for ${envConf.DB_NAME} server`,
           termsOfService: "http://example.com/terms/",
           contact: {
             name: "API Support",
             url: "http://www.example.com/support",
-            email: "thuongtruong1009@proton.me",
+            email: "thuongtruong@proton.me",
           },
           license: {
             name: "Apache 2.0",
             url: "https://www.apache.org/licenses/LICENSE-2.0.html",
           },
-          schemes:
-            process.env.NODE_ENV === "development" ? ["http"] : ["https"],
+          schemes: envConf.NODE_ENV === "development" ? ["http"] : ["https"],
           server: [
             {
               url: "{protocol}://api.example.com",
@@ -152,8 +133,33 @@ class App {
     this.app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
   }
 
-  private initializeErrorHandling() {
-    this.app.use(ErrorHandler);
+  public listen() {
+    try {
+      this._signal = this.app.listen(envConf.PORT, () => {
+        console.log(
+          `• Server (${envConf.NODE_ENV}) listening on the port ${envConf.PORT}`
+        );
+      });
+    } catch (error) {
+      console.log("• Cannot connect to the server");
+    }
+    this.app.get("/", (req: Request, res: Response) => {
+      res.send("Hello World!");
+    });
+  }
+
+  public getApp() {
+    return this.app;
+  }
+
+  public onCloseSignal() {
+    this.logger.info("sigint received, shutting down");
+    this._signal.close(() => {
+      this.logger.info("server closed");
+      process.exit();
+    });
+    // Force shutdown after 10s
+    setTimeout(() => process.exit(1), 10000).unref();
   }
 }
 
