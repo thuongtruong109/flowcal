@@ -1,6 +1,11 @@
-import { Error } from "mongoose";
-import db from "../models";
-import { CATEGORY_CONST, COLOR_CONST, ROLE_CONST, TAG_CONST } from "../constants";
+import {
+  CATEGORY_CONST,
+  COLOR_CONST,
+  ROLE_CONST,
+  TAG_CONST,
+} from "@/constants";
+import db from "@/models";
+import type { Error } from "mongoose";
 
 function initTag() {
   db.tag.estimatedDocumentCount((err: Error | null, count: number) => {
@@ -54,25 +59,25 @@ function initCategory() {
 }
 
 function initColor() {
-    db.color.estimatedDocumentCount((err: Error | null, count: number) => {
-      if (!err && count === 0) {
-        COLOR_CONST.forEach((color: string) => {
-          new db.color({
-            name: `${color}`,
-          }).save((err: Error | null) => {
-            if (err) {
-              console.log("error", err);
-            }
-          });
+  db.color.estimatedDocumentCount((err: Error | null, count: number) => {
+    if (!err && count === 0) {
+      COLOR_CONST.forEach((color: string) => {
+        new db.color({
+          name: `${color}`,
+        }).save((err: Error | null) => {
+          if (err) {
+            console.log("error", err);
+          }
         });
-      }
-    });
-    console.log("-> seeding successfully for color collection");
-  }
+      });
+    }
+  });
+  console.log("-> seeding successfully for color collection");
+}
 
 export default function initSampleSeed() {
-    initColor();
-    initRole();
-    initTag();
-    initCategory();
+  initColor();
+  initRole();
+  initTag();
+  initCategory();
 }

@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import type { Request, Response } from "express";
 
 import db from "@/models";
 const User = db.user;
@@ -42,7 +42,7 @@ const getAllEvents = async (req: any, res: Response) => {
       const events = await Event.find(
         { attendees: { $in: req.user.id } },
         { "time.date": queryDateTimePeriod(req.query.start, req.query.end) },
-        "title time updatedAt"
+        "title time updatedAt" as any
       ).populate("colorId", "name");
       res.status(200).send({ total, events });
     }

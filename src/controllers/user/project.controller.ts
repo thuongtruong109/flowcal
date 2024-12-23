@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
 import CardModel from "@/models/card.model";
+import type { Request, Response } from "express";
 
 import db from "@/models";
 const User = db.user;
@@ -25,7 +25,7 @@ const createProject = async (req: any, res: Response): Promise<void> => {
 
 const getAllProjects = async (req: any, res: Response): Promise<void> => {
   try {
-    let access: string = req.query.access;
+    const access: string = req.query.access;
 
     if (access === "all") {
       const total = await Project.countDocuments({

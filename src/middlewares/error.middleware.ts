@@ -1,7 +1,11 @@
-import { Request, Response, NextFunction, ErrorRequestHandler } from "express";
-
-import { HttpException } from "@/helpers/exception.helper";
 import { logger } from "@/configs/log.config";
+import type { HttpException } from "@/helpers/exception.helper";
+import type {
+  ErrorRequestHandler,
+  NextFunction,
+  Request,
+  Response,
+} from "express";
 
 const ErrorHandler: ErrorRequestHandler = (
   err: HttpException,

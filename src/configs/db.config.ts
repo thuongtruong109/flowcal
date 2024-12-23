@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
 import { envConf } from "@/configs/env.config";
 import initSampleSeed from "@/configs/seed";
+import mongoose from "mongoose";
 
 function ConnectDB() {
   const options: any = {

@@ -1,5 +1,5 @@
-import { existsSync, mkdirSync } from "fs-extra";
 import { join } from "node:path";
+import { existsSync, mkdirSync } from "fs-extra";
 import winston from "winston";
 import winstonDaily from "winston-daily-rotate-file";
 
@@ -22,8 +22,8 @@ const logger = winston.createLogger({
     new winstonDaily({
       level: "debug",
       datePattern: "YYYY-MM-DD",
-      dirname: logDir + "/debug",
-      filename: `%DATE%.log`,
+      dirname: `${logDir}/debug`,
+      filename: "%DATE%.log",
       maxFiles: 30,
       json: false,
       zippedArchive: true,
@@ -31,8 +31,8 @@ const logger = winston.createLogger({
     new winstonDaily({
       level: "error",
       datePattern: "YYYY-MM-DD",
-      dirname: logDir + "/error",
-      filename: `%DATE%.log`,
+      dirname: `${logDir}/error`,
+      filename: "%DATE%.log",
       maxFiles: 30,
       handleExceptions: true,
       json: false,

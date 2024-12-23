@@ -1,5 +1,5 @@
-import { E_COLLECTION } from "../enums";
 import mongoose from "mongoose";
+import { E_COLLECTION } from "@/enums";
 
 interface IBoardModel extends mongoose.Document {
   projectId: mongoose.Schema.Types.ObjectId;

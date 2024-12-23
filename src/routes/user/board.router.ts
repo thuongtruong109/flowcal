@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { IRouter } from "@/types";
+import type { IRouter } from "@/types";
 import boardController from "@/controllers/user/board.controller";
 import verifyAuth from "@/middlewares/authen.middleware";
 

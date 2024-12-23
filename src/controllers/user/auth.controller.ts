@@ -1,19 +1,18 @@
-import { Request, Response } from "express";
-import { Error } from "mongoose";
+import type { Request, Response } from "express";
 import jwt from "jsonwebtoken";
+import { Error } from "mongoose";
 import nodemailer from "nodemailer";
-
-import { hashPassword, comparePassword } from "@/utils/hash";
 import { confirmEmailMsg } from "@/helpers/email.helper";
-import { IRole, IUser } from "@/types";
-
-import db from "@/models";
+import type { IRole, IUser } from "@/types";
+import { comparePassword, hashPassword } from "@/utils/hash";
 import { envConf } from "@/configs/env.config";
+import db from "@/models";
+
 const User = db.user;
 const Role = db.role;
 
 const signup = async (req: Request, res: Response) => {
-  let key = await hashPassword(req.body.password);
+  const key = await hashPassword(req.body.password);
   const user = new User({
     username: req.body.username,
     email: req.body.email,
@@ -102,7 +101,7 @@ function sendConfirmationEmail(email: string) {
     },
   } as any);
 
-  let token = jwt.sign({ email }, envConf.SECRET_KEY);
+  const token = jwt.sign({ email }, envConf.SECRET_KEY);
 
   return transporter.sendMail(confirmEmailMsg(email, token), (err, info) => {
     if (err) {
@@ -114,7 +113,7 @@ function sendConfirmationEmail(email: string) {
 }
 
 const verifyAccount = (req: Request, res: Response) => {
-  var email = null;
+  let email = null;
   try {
     const payload = jwt.verify(
       req.params.token,
@@ -184,7 +183,7 @@ const signin = (req: Request, res: Response) => {
         secure: true,
       });
 
-      var authorities: string[] = [];
+      const authorities: string[] = [];
       for (let i = 0; i < user.roles.length; i++) {
         authorities.push(user.roles[i].name.toUpperCase());
       }

@@ -1,6 +1,6 @@
-import { Router } from "express";
-import { IRouter } from "@/types";
 import statisticalController from "@/controllers/admin/statistical.controller";
+import type { IRouter } from "@/types";
+import { Router } from "express";
 
 class StatisticalRouter implements IRouter {
   public path = "/overview";

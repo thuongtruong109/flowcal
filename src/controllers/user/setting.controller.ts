@@ -1,5 +1,5 @@
 import { unlink } from "node:fs/promises";
-import { Request, Response } from "express";
+import type { Request, Response } from "express";
 
 import db from "@/models";
 const User = db.user;

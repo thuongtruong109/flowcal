@@ -1,7 +1,7 @@
-import { Request, Response, NextFunction } from "express";
-import { Error } from "mongoose";
-import { IUser } from "@/types";
 import { ROLE_CONST } from "@/constants";
+import type { IUser } from "@/types";
+import type { Request, Response, NextFunction } from "express";
+import type { Error } from "mongoose";
 
 import db from "@/models";
 

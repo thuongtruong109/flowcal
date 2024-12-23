@@ -1,17 +1,17 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
   "formatter": {
-    "indentStyle": "space",
-    "lineWidth": 120
+    "enabled": false
   },
-  "organizeImports": { "enabled": true },
+  "organizeImports": { "enabled": false },
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": true,
       "suspicious": {
         "noExplicitAny": "off",
-        "noConfusingVoidType": "off"
+        "noConfusingVoidType": "off",
+        "noShadowRestrictedNames": "off"
       },
       "style": {
         "noUselessElse": "off",

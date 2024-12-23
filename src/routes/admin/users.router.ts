@@ -1,6 +1,5 @@
 import { Router } from "express";
-import { IRouter } from "@/types";
-
+import type { IRouter } from "@/types";
 import usersController from "@/controllers/admin/users.controller";
 
 class UsersRouter implements IRouter {

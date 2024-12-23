@@ -1,5 +1,6 @@
 # 🚀 Boardly
 
+[![CI](https://github.com/thuongtruong109/boardly/actions/workflows/ci.yml/badge.svg)](https://github.com/thuongtruong109/boardly/actions/workflows/ci.yml)
 [![CD](https://github.com/thuongtruong109/boardly/actions/workflows/cd.yml/badge.svg)](https://github.com/thuongtruong109/boardly/actions/workflows/cd.yml)
 
 <!-- [![Test](https://github.com/thuongtruong109/boardly/actions/workflows/test.yml/badge.svg)](https://github.com/thuongtruong109/boardly/actions/workflows/test.yml)

@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import type { Request, Response } from "express";
 
 import db from "@/models";
 const Board = db.board;
@@ -12,8 +12,10 @@ const getAllCards = async (req: Request, res: Response): Promise<void> => {
           _id: "$status",
           total: { $sum: 1 },
           childrens: { $push: "$$ROOT" },
-          $sort: { status: 1 },
         },
+      },
+      {
+        $sort: { _id: 1 },
       },
     ]);
     res.status(200).send(groupCards);

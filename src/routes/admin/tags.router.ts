@@ -1,6 +1,5 @@
 import { Router } from "express";
-import { IRouter } from "@/types";
-
+import type { IRouter } from "@/types";
 import tagsController from "@/controllers/admin/tags.controller";
 
 class TagsRouter implements IRouter {

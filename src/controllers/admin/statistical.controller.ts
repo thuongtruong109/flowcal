@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import type { Request, Response } from "express";
 
 import db from "@/models";
 const Tag = db.tag;
@@ -13,7 +13,7 @@ const Category = db.category;
 const getOverview = async (req: Request, res: Response): Promise<void> => {
   try {
     switch (req.query.scope) {
-      case "card":
+      case "card": {
         const totalCards = await Card.countDocuments();
         const groupCards = await Card.aggregate([
           {
@@ -25,7 +25,8 @@ const getOverview = async (req: Request, res: Response): Promise<void> => {
         ]);
         res.status(200).send({ total: totalCards, groups: groupCards });
         break;
-      case "board":
+      }
+      case "board": {
         const totalBoards = await Board.countDocuments();
         const groupBoards = await Board.aggregate([
           {
@@ -37,7 +38,8 @@ const getOverview = async (req: Request, res: Response): Promise<void> => {
         ]);
         res.status(200).send({ total: totalBoards, groups: groupBoards });
         break;
-      case "project":
+      }
+      case "project": {
         const totalProject = await Project.countDocuments();
         const projects = await Project.aggregate([
           {
@@ -49,7 +51,8 @@ const getOverview = async (req: Request, res: Response): Promise<void> => {
         ]);
         res.status(200).send({ total: totalProject, groups: projects });
         break;
-      case "tag":
+      }
+      case "tag": {
         const totalTags = await Tag.countDocuments();
         const groupTags = await Tag.aggregate([
           {
@@ -62,7 +65,8 @@ const getOverview = async (req: Request, res: Response): Promise<void> => {
 
         res.status(200).send({ total: totalTags, groups: groupTags });
         break;
-      case "tag":
+      }
+      case "color": {
         const totalColors = await Color.countDocuments();
         const groupColors = await Color.aggregate([
           {
@@ -75,7 +79,8 @@ const getOverview = async (req: Request, res: Response): Promise<void> => {
 
         res.status(200).send({ total: totalColors, groups: groupColors });
         break;
-      case "category":
+      }
+      case "category": {
         const totalCategories = await Category.countDocuments();
         const groupCategories = await Category.aggregate([
           {
@@ -90,7 +95,8 @@ const getOverview = async (req: Request, res: Response): Promise<void> => {
           .status(200)
           .send({ total: totalCategories, groups: groupCategories });
         break;
-      default:
+      }
+      default: {
         const totalUsers = await User.countDocuments();
         const groupUsers = await User.aggregate([
           {
@@ -102,6 +108,7 @@ const getOverview = async (req: Request, res: Response): Promise<void> => {
         ]);
         res.status(200).send({ total: totalUsers, groups: groupUsers });
         break;
+      }
     }
   } catch (error) {
     res.status(500).send({ message: error });

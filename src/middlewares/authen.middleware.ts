@@ -1,20 +1,19 @@
-import { Response, NextFunction } from "express";
-import { Error } from "mongoose";
-
-import { IDecoded, IRole, IUser } from "@/types";
+import type { Response, NextFunction } from "express";
+import type { Error } from "mongoose";
+import type { IDecoded, IRole, IUser } from "@/types";
 import jwt from "jsonwebtoken";
-
 import db from "@/models";
 import { envConf } from "@/configs/env.config";
+
 const User = db.user;
 const Role = db.role;
 
 const verifyToken = (req: any, res: Response, next: NextFunction) => {
-  if (req.method == "OPTIONS") {
+  if (req.method === "OPTIONS") {
     return res.status(200).json({});
   }
   try {
-    let token = req.headers["authorization"];
+    const token = req.headers.authorization;
     if (!token) {
       return res
         .status(403)

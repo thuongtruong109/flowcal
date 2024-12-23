@@ -1,6 +1,5 @@
 import { Router } from "express";
-import { IRouter } from "@/types";
-
+import type { IRouter } from "@/types";
 import eventController from "@/controllers/user/event.controller";
 import verifyAuth from "@/middlewares/authen.middleware";
 

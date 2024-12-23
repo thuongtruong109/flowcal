@@ -1,22 +1,22 @@
-import compression from "compression";
-import cookieParser from "cookie-parser";
-import fs from "fs-extra";
-import cors from "cors";
-import express, { Request, Response, type Express } from "express";
+import type { Server } from "node:http";
 import path from "node:path";
-import helmet from "helmet";
-import hpp from "hpp";
-import swaggerJSDoc from "swagger-jsdoc";
-import swaggerUi from "swagger-ui-express";
 import ConnectDB from "@/configs/db.config";
-import { IRouter } from "@/types";
-import morgan from "morgan";
+import { envConf } from "@/configs/env.config";
 import ErrorHandler from "@/middlewares/error.middleware";
 import { rateLimiterMiddleware } from "@/middlewares/rate.middleware";
+import type { IRouter } from "@/types";
 import { capitializeString } from "@/utils";
-import pino, { Logger } from "pino";
-import { envConf } from "@/configs/env.config";
-import { Server } from "node:http";
+import compression from "compression";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import express, { type Request, type Response, type Express } from "express";
+import fs from "fs-extra";
+import helmet from "helmet";
+import hpp from "hpp";
+import morgan from "morgan";
+import pino, { type Logger } from "pino";
+import swaggerJSDoc from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express";
 
 class App {
   public app: Express;

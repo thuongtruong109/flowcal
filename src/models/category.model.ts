@@ -1,5 +1,5 @@
-import { E_COLLECTION } from "../enums";
 import mongoose from "mongoose";
+import { E_COLLECTION } from "@/enums";
 
 interface IColorModel extends mongoose.Document {
   name: string;
@@ -14,6 +14,9 @@ const CategorySchema = new mongoose.Schema({
   },
 });
 
-const CategoryModel = mongoose.model<IColorModel>(E_COLLECTION.CATEGORY, CategorySchema);
+const CategoryModel = mongoose.model<IColorModel>(
+  E_COLLECTION.CATEGORY,
+  CategorySchema
+);
 
 export default CategoryModel;

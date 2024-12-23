@@ -1,4 +1,4 @@
-import { E_COLLECTION } from "../enums";
+import { E_COLLECTION } from "@/enums";
 import mongoose from "mongoose";
 
 interface IProjectModel extends mongoose.Document {
@@ -87,6 +87,9 @@ const ProjectSchema = new mongoose.Schema({
   },
 }).set("timestamps", true);
 
-const ProjectModel = mongoose.model<IProjectModel>(E_COLLECTION.PROJECT, ProjectSchema);
+const ProjectModel = mongoose.model<IProjectModel>(
+  E_COLLECTION.PROJECT,
+  ProjectSchema
+);
 
 export default ProjectModel;

@@ -1,14 +1,13 @@
 import mongoose from "mongoose";
-
-import RoleModel from "./role.model";
-import UserModel from "./user.model";
-import TagModel from "./tag.model";
-import ProjectModel from "./project.model";
-import BoardModel from "./board.model";
-import CardModel from "./card.model";
-import ColorModel from "./color.model";
-import CategoryModel from "./category.model";
-import EventModel from "./event.model";
+import BoardModel from "@/models/board.model";
+import CardModel from "@/models/card.model";
+import CategoryModel from "@/models/category.model";
+import ColorModel from "@/models/color.model";
+import EventModel from "@/models/event.model";
+import ProjectModel from "@/models/project.model";
+import RoleModel from "@/models/role.model";
+import TagModel from "@/models/tag.model";
+import UserModel from "@/models/user.model";
 
 mongoose.Promise = global.Promise;
 

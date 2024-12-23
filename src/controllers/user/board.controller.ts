@@ -1,7 +1,7 @@
-import { Request, Response } from "express";
-import cardController from "./card.controller";
-import * as object from "mongoose";
 import db from "@/models";
+import type { Request, Response } from "express";
+import * as object from "mongoose";
+import cardController from "./card.controller";
 
 const ObjectId = object.Types.ObjectId;
 const Project = db.project;
