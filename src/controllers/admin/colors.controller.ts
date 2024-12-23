@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 
-import db from "@/models";
+import db from "../../models";
 const Color = db.color;
 
 const createColor = async (req: Request, res: Response): Promise<void> => {

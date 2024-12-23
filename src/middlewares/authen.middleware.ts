@@ -1,9 +1,9 @@
 import type { Response, NextFunction } from "express";
 import type { Error } from "mongoose";
-import type { IDecoded, IRole, IUser } from "@/types";
+import type { IDecoded, IRole, IUser } from "../types";
 import jwt from "jsonwebtoken";
-import db from "@/models";
-import { envConf } from "@/configs/env.config";
+import db from "../models";
+import { envConf } from "../configs/env.config";
 
 const User = db.user;
 const Role = db.role;

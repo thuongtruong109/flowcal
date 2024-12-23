@@ -1,0 +1,17 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "build",
+      "group": "build",
+      "problemMatcher": [],
+      "label": "npm: build",
+      "detail": "Build the project"
+    }
+  ],
+  "command": "node",
+  "args": [
+    "${workspaceRoot}\\node_modules\\typescript\\bin\\tsc"
+  ],
+}

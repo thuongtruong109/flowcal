@@ -1,4 +1,4 @@
-import type { IRole } from "@/types";
+import type { IRole } from "./role";
 
 export type IUser = {
   _id: string;

@@ -1,6 +1,6 @@
 import { Router } from "express";
-import type { IRouter } from "@/types";
-import colorsController from "@/controllers/admin/colors.controller";
+import type { IRouter } from "../../types";
+import colorsController from "../../controllers/admin/colors.controller";
 
 class ColorsRouter implements IRouter {
   public path = "/colors";

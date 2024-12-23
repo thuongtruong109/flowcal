@@ -3,8 +3,8 @@ import {
   COLOR_CONST,
   ROLE_CONST,
   TAG_CONST,
-} from "@/constants";
-import db from "@/models";
+} from "../constants";
+import db from "../models";
 import type { Error } from "mongoose";
 
 function initTag() {

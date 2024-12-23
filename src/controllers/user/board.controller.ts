@@ -1,4 +1,4 @@
-import db from "@/models";
+import db from "../../models";
 import type { Request, Response } from "express";
 import * as object from "mongoose";
 import cardController from "./card.controller";

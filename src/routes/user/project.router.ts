@@ -1,7 +1,7 @@
 import { Router } from "express";
-import type { IRouter } from "@/types";
-import projectController from "@/controllers/user/project.controller";
-import verifyAuth from "@/middlewares/authen.middleware";
+import type { IRouter } from "../../types";
+import projectController from "../../controllers/user/project.controller";
+import verifyAuth from "../../middlewares/authen.middleware";
 
 class ProjectRouter implements IRouter {
   public path = "/project";

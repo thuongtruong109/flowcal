@@ -1,8 +1,8 @@
 import { Router } from "express";
-import verifySignUp from "@/middlewares/signup.middleware";
-import authController from "@/controllers/user/auth.controller";
-import type { IRouter } from "@/types";
-import verifyAuth from "@/middlewares/authen.middleware";
+import verifySignUp from "../../middlewares/signup.middleware";
+import authController from "../../controllers/user/auth.controller";
+import type { IRouter } from "../../types";
+import verifyAuth from "../../middlewares/authen.middleware";
 
 class AuthRouter implements IRouter {
   public path = "/auth";

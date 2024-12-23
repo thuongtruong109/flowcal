@@ -1,4 +1,4 @@
-import { E_COLLECTION } from "@/enums";
+import { E_COLLECTION } from "../enums";
 import mongoose from "mongoose";
 
 interface ITagModel extends mongoose.Document {

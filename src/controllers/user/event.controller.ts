@@ -1,9 +1,9 @@
 import type { Request, Response } from "express";
+import db from "../../models";
+import { queryDateTimePeriod } from "../../utils";
 
-import db from "@/models";
 const User = db.user;
 const Event = db.event;
-import { queryDateTimePeriod } from "@/utils";
 
 const createEvent = async (req: any, res: Response) => {
   try {

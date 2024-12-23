@@ -2,11 +2,11 @@ import type { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { Error } from "mongoose";
 import nodemailer from "nodemailer";
-import { confirmEmailMsg } from "@/helpers/email.helper";
-import type { IRole, IUser } from "@/types";
-import { comparePassword, hashPassword } from "@/utils/hash";
-import { envConf } from "@/configs/env.config";
-import db from "@/models";
+import { confirmEmailMsg } from "../../helpers/email.helper";
+import type { IRole, IUser } from "../../types";
+import { comparePassword, hashPassword } from "../../utils/hash";
+import { envConf } from "../../configs/env.config";
+import db from "../../models";
 
 const User = db.user;
 const Role = db.role;

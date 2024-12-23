@@ -1,7 +1,7 @@
 import { unlink } from "node:fs/promises";
 import type { Request, Response } from "express";
+import db from "../../models";
 
-import db from "@/models";
 const User = db.user;
 const Project = db.project;
 const Board = db.board;

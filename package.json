@@ -1,14 +1,14 @@
 {
   "name": "boardly",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.ts",
   "license": "MIT",
   "scripts": {
     "dev:docker": "nodemon /app/src/index.ts",
     "start:docker": "node /app/dist/src/index.js",
     "dev": "nodemon --exec ts-node src/index.ts --watch src",
     "start:local": "node dist/src/index.js",
-    "dev2": "tsx watch --clear-screen=false src/index.ts | pino-pretty",
+    "dev2": "tsx watch --clear-screen=false src/index.ts",
     "build": "tsc -p .",
     "test": "jest src/test/app.test.js",
     "clean": "rimraf dist coverage",
@@ -29,7 +29,6 @@
     "hpp": "^0.2.3",
     "jsonwebtoken": "^9.0.0",
     "mailgen": "^2.0.27",
-    "module-alias": "^2.2.3",
     "moment": "^2.29.4",
     "mongoose": "^6.7.5",
     "morgan": "^1.10.0",
@@ -40,6 +39,7 @@
     "sharp": "^0.31.3",
     "swagger-jsdoc": "^6.2.5",
     "swagger-ui-express": "^4.6.0",
+    "tsx": "^4.19.2",
     "winston": "^3.8.2",
     "winston-daily-rotate-file": "^4.7.1"
   },
@@ -72,18 +72,5 @@
     "*.{js,ts,cjs,mjs,d.cts,d.mts,json,jsonc}": [
       "biome check --apply --no-errors-on-unmatched"
     ]
-  },
-  "_moduleAliases": {
-    "@/configs": "dist/src/configs",
-    "@/constants": "dist/src/constants",
-    "@/controllers": "dist/src/controllers",
-    "@/decorators": "dist/src/decorators",
-    "@/enums": "dist/src/enums",
-    "@/helpers": "dist/src/helpers",
-    "@/middlewares": "dist/src/middlewares",
-    "@/models": "dist/src/models",
-    "@/routes": "dist/src/routes",
-    "@/utils": "dist/src/utils",
-    "@/types": "dist/src/types"
   }
 }

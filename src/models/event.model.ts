@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { E_COLLECTION } from "@/enums";
+import { E_COLLECTION } from "../enums";
 
 interface IEventModel extends mongoose.Document {
   organizer: mongoose.Schema.Types.ObjectId;

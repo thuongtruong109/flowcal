@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { E_COLLECTION } from "@/enums";
+import { E_COLLECTION } from "../enums";
 
 interface IColorModel extends mongoose.Document {
   name: string;

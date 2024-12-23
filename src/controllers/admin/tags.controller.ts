@@ -1,6 +1,5 @@
 import type { Request, Response } from "express";
-
-import db from "@/models";
+import db from "../../models";
 const Board = db.board;
 const Tag = db.tag;
 

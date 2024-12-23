@@ -1,5 +1,5 @@
-import { logger } from "@/configs/log.config";
-import type { HttpException } from "@/helpers/exception.helper";
+import { logger } from "../configs/log.config";
+import type { HttpException } from "../helpers/exception.helper";
 import type {
   ErrorRequestHandler,
   NextFunction,

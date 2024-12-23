@@ -1,4 +1,4 @@
-import { envConf } from "@/configs/env.config";
+import { envConf } from "../configs/env.config";
 import Mailgen from "mailgen";
 
 const emailTemplate = (toUserEmail: string, emailToken: string) => {

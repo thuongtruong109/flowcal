@@ -1,4 +1,4 @@
-import { envConf } from "@/configs/env.config";
+import { envConf } from "../configs/env.config";
 import rateLimit from "express-rate-limit";
 
 export const rateLimiterMiddleware = rateLimit({

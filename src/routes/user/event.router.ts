@@ -1,7 +1,7 @@
 import { Router } from "express";
-import type { IRouter } from "@/types";
-import eventController from "@/controllers/user/event.controller";
-import verifyAuth from "@/middlewares/authen.middleware";
+import type { IRouter } from "../../types";
+import eventController from "../../controllers/user/event.controller";
+import verifyAuth from "../../middlewares/authen.middleware";
 
 class EventRouter implements IRouter {
   public path = "/event";

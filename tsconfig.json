@@ -24,41 +24,8 @@
     "baseUrl": ".",
     "paths": {
       "*": ["node_modules/*", "src/types/*"],
-      "@/*": ["src/*"],
-      "@/configs/*": ["src/configs/*"],
-      "@/constants/*": ["src/constants/*"],
-      "@/controllers/*": ["src/controllers/*"],
-      "@/decorators/*": ["src/decorators/*"],
-      "@/enums/*": ["src/enums/*"],
-      "@/helpers/*": ["src/helpers/*"],
-      "@/middlewares/*": ["src/middlewares/*"],
-      "@/models/*": ["src/models/*"],
-      "@/routes/*": ["src/routes/*"],
-      "@/utils/*": ["src/utils/*"],
-      "@/types/*": ["src/types/*"]
     }
   },
   "include": ["src/**/*.ts", "src/index.ts"],
   "exclude": ["node_modules", "demo", "logs", "client", "dist"]
 }
-
-// {
-//   "compilerOptions": {
-//     "target": "ESNext",
-//     "module": "CommonJS",
-//     "baseUrl": ".",
-//     "paths": {
-//       "@/*": ["src/*"]
-//     },
-//     "moduleResolution": "Node",
-//     "outDir": "dist",
-//     "importsNotUsedAsValues": "remove",
-//     "strict": true,
-//     "esModuleInterop": true,
-//     "skipLibCheck": true,
-//     "forceConsistentCasingInFileNames": true,
-//     "types": ["vitest/globals"]
-//   },
-//   "include": ["src/**/*"],
-//   "exclude": ["node_modules"]
-// }

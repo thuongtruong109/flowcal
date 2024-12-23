@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { E_COLLECTION } from "@/enums";
+import { E_COLLECTION } from "../enums";
 
 interface ICardModel extends mongoose.Document {
   boardId: string;

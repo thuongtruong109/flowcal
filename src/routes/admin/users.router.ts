@@ -1,6 +1,6 @@
 import { Router } from "express";
-import type { IRouter } from "@/types";
-import usersController from "@/controllers/admin/users.controller";
+import type { IRouter } from "../../types";
+import usersController from "../../controllers/admin/users.controller";
 
 class UsersRouter implements IRouter {
   public path = "/users";

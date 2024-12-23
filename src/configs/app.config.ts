@@ -1,11 +1,11 @@
 import type { Server } from "node:http";
 import path from "node:path";
-import ConnectDB from "@/configs/db.config";
-import { envConf } from "@/configs/env.config";
-import ErrorHandler from "@/middlewares/error.middleware";
-import { rateLimiterMiddleware } from "@/middlewares/rate.middleware";
-import type { IRouter } from "@/types";
-import { capitializeString } from "@/utils";
+// import ConnectDB from "@/configs/db.config";
+import { envConf } from "./env.config";
+import ErrorHandler from "../middlewares/error.middleware";
+import { rateLimiterMiddleware } from "../middlewares/rate.middleware";
+import type { IRouter } from "../types";
+import { capitializeString } from "../utils";
 import compression from "compression";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -29,7 +29,7 @@ class App {
     this._initMiddlewares();
     this._initRoutes(userRoutes, adminRoutes);
     this._initSwagger();
-    ConnectDB();
+    // ConnectDB();
   }
 
   private _writeLogs(fileName: string) {
