@@ -20,7 +20,7 @@ COPY --chown=node:node ./package.json ./
 
 COPY --chown=node:node --from=development /app/dist /app/dist
 
-RUN npx npm install --production
+RUN npm install --omit=dev
 
 LABEL "maintainer"="thuongtruong1009 <thuongtruong@proton.me>"
 LABEL "org.opencontainers.image.authors"="Tran Nguyen Thuong Truong"
