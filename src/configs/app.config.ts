@@ -1,6 +1,5 @@
 import type { Server } from "node:http";
 import path from "node:path";
-// import ConnectDB from "@/configs/db.config";
 import { envConf } from "./env.config";
 import ErrorHandler from "../middlewares/error.middleware";
 import { rateLimiterMiddleware } from "../middlewares/rate.middleware";
@@ -17,6 +16,7 @@ import morgan from "morgan";
 import pino, { type Logger } from "pino";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
+import ConnectDB from "./db.config";
 
 class App {
   public app: Express;
@@ -29,7 +29,7 @@ class App {
     this._initMiddlewares();
     this._initRoutes(userRoutes, adminRoutes);
     this._initSwagger();
-    // ConnectDB();
+    ConnectDB();
   }
 
   private _writeLogs(fileName: string) {
@@ -46,7 +46,7 @@ class App {
     this.app.set("trust proxy", true);
     this.app.use(
       cors<Request>({
-        origin: envConf.CORS_ORIGIN,
+        origin: envConf.corsOrigin,
         allowedHeaders: [
           "Origin",
           "X-Requested-With",
@@ -100,9 +100,9 @@ class App {
     const options = {
       swaggerDefinition: {
         info: {
-          title: capitializeString(envConf.DB_NAME),
+          title: capitializeString(envConf.dbName),
           version: "1.0.0",
-          description: `The API documentation for ${envConf.DB_NAME} server`,
+          description: `The API documentation for ${envConf.dbName} server`,
           termsOfService: "http://example.com/terms/",
           contact: {
             name: "API Support",
@@ -113,7 +113,7 @@ class App {
             name: "Apache 2.0",
             url: "https://www.apache.org/licenses/LICENSE-2.0.html",
           },
-          schemes: envConf.NODE_ENV === "development" ? ["http"] : ["https"],
+          schemes: envConf.nodeEnv === "development" ? ["http"] : ["https"],
           server: [
             {
               url: "{protocol}://api.example.com",
@@ -135,9 +135,9 @@ class App {
 
   public listen() {
     try {
-      this._signal = this.app.listen(envConf.PORT, () => {
+      this._signal = this.app.listen(envConf.port, () => {
         console.log(
-          `• Server (${envConf.NODE_ENV}) listening on the port ${envConf.PORT}`
+          `• Server (${envConf.nodeEnv}) listening on the port ${envConf.port}`
         );
       });
     } catch (error) {
@@ -158,7 +158,7 @@ class App {
       this.logger.info("server closed");
       process.exit();
     });
-    // Force shutdown after 10s
+
     setTimeout(() => process.exit(1), 10000).unref();
   }
 }

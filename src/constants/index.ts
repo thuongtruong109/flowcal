@@ -1,8 +1,8 @@
-export const CATEGORY_CONST: Array<string> = ["kanban", "todo", "custom"];
+export const CATEGORY: Array<string> = ["kanban", "todo", "note"];
 
-export const ROLE_CONST: Array<string> = ["USER", "ADMIN", "MODERATOR"];
+export const ROLE: Array<string> = ["admin", "user"];
 
-export const TAG_CONST: Array<string> = [
+export const TAG: Array<string> = [
     "family",
     "work",
     "study",
@@ -11,7 +11,7 @@ export const TAG_CONST: Array<string> = [
     "secret",
 ];
 
-export const COLOR_CONST: Array<string> = [
+export const COLOR: Array<string> = [
     "#FFDCA2",
     "#E4C7B7",
     "#BCE6FF",
@@ -23,3 +23,15 @@ export const COLOR_CONST: Array<string> = [
     "#CFF4D2",
     "#F5CEC7",
 ];
+
+export const ENTITY = {
+    USER: "User",
+    ROLE: "Role",
+    PROJECT: "Project",
+    EVENT: "Event",
+    TAG: "Tag",
+    COLOR: "Color",
+    BOARD: "Board",
+    CATEGORY: "Category",
+    CARD: "Card",
+};

@@ -23,9 +23,7 @@ dist
 *.sln
 *.sw?
 
-# Docker
-docker/mongo/data
-docker/ngrok/data
+.docker/mongo/data
 
 !*/**/.gitkeep
 !*/**/.gitkeep

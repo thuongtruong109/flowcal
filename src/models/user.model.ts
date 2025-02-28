@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { E_COLLECTION } from "../enums";
+import { ENTITY } from "../constants";
 
 interface IUserModel extends mongoose.Document {
   username: string;
@@ -41,19 +41,19 @@ const UserSchema: mongoose.Schema = new mongoose.Schema(
     roles: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: E_COLLECTION.ROLE,
+        ref: ENTITY.ROLE,
       },
     ],
     projects: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: E_COLLECTION.PROJECT,
+        ref: ENTITY.PROJECT,
       },
     ],
     events: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: E_COLLECTION.EVENT,
+        ref: ENTITY.EVENT,
       },
     ],
   },
@@ -64,6 +64,6 @@ const UserSchema: mongoose.Schema = new mongoose.Schema(
 UserSchema.set("toObject", { virtuals: true });
 UserSchema.set("toJSON", { virtuals: true });
 
-const UserModel = mongoose.model<IUserModel>(E_COLLECTION.USER, UserSchema);
+const UserModel = mongoose.model<IUserModel>(ENTITY.USER, UserSchema);
 
 export default UserModel;

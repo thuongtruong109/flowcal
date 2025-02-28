@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { E_COLLECTION } from "../enums";
+import { ENTITY } from "../constants";
 
 interface IRoleModel extends mongoose.Document {
   name: string;
@@ -12,6 +12,6 @@ const roleSchema: mongoose.Schema = new mongoose.Schema({
   },
 });
 
-const RoleModel = mongoose.model<IRoleModel>(E_COLLECTION.ROLE, roleSchema);
+const RoleModel = mongoose.model<IRoleModel>(ENTITY.ROLE, roleSchema);
 
 export default RoleModel;

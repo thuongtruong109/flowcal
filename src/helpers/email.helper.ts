@@ -5,14 +5,14 @@ const emailTemplate = (toUserEmail: string, emailToken: string) => {
   const mailGenerator = new Mailgen({
     theme: "default",
     product: {
-      name: envConf.DB_NAME,
-      link: envConf.APP_URL,
-      logo: `${envConf.APP_URL}/assets/metasave_logo.png`,
+      name: envConf.dbName,
+      link: envConf.appUrl,
+      logo: `${envConf.appUrl}/assets/metasave_logo.png`,
       copyright: "Copyright © 2022 Tran Nguyen Thuong Truong.",
     },
   });
 
-  const urlConfirm = `${envConf.APP_URL}/api/auth/verify/${emailToken}`;
+  const urlConfirm = `${envConf.appUrl}/api/auth/verify/${emailToken}`;
 
   const email = {
     body: {
@@ -37,7 +37,7 @@ const emailTemplate = (toUserEmail: string, emailToken: string) => {
 
 export const confirmEmailMsg = (toUserEmail: string, emailToken: string) => {
   return {
-    from: envConf.EMAIL_USERNAME,
+    from: envConf.emailUsername,
     to: toUserEmail,
     subject: "Confirm your email",
     html: emailTemplate(toUserEmail, emailToken),

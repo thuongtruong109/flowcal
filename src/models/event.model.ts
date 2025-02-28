@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { E_COLLECTION } from "../enums";
+import { ENTITY } from "../constants";
 
 interface IEventModel extends mongoose.Document {
   organizer: mongoose.Schema.Types.ObjectId;
@@ -18,7 +18,7 @@ interface IEventModel extends mongoose.Document {
 const eventSchema: mongoose.Schema = new mongoose.Schema({
   organizer: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: E_COLLECTION.USER,
+    ref: ENTITY.USER,
     required: true,
   },
   title: {
@@ -50,17 +50,17 @@ const eventSchema: mongoose.Schema = new mongoose.Schema({
   attendees: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: E_COLLECTION.USER,
+      ref: ENTITY.USER,
       default: [],
     },
   ],
   colorId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: E_COLLECTION.COLOR,
+    ref: ENTITY.COLOR,
     required: true,
   },
 }).set("timestamps", true);
 
-const EventModel = mongoose.model<IEventModel>(E_COLLECTION.EVENT, eventSchema);
+const EventModel = mongoose.model<IEventModel>(ENTITY.EVENT, eventSchema);
 
 export default EventModel;

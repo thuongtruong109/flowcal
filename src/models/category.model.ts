@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { E_COLLECTION } from "../enums";
+import { ENTITY } from "../constants";
 
 interface IColorModel extends mongoose.Document {
   name: string;
@@ -15,7 +15,7 @@ const CategorySchema = new mongoose.Schema({
 });
 
 const CategoryModel = mongoose.model<IColorModel>(
-  E_COLLECTION.CATEGORY,
+  ENTITY.CATEGORY,
   CategorySchema
 );
 

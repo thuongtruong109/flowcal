@@ -1,4 +1,4 @@
-import { ROLE_CONST } from "../constants";
+import { ROLE } from "../constants";
 import type { IUser } from "../types";
 import type { Request, Response, NextFunction } from "express";
 import type { Error } from "mongoose";
@@ -45,7 +45,7 @@ const checkDuplicateUsernameOrEmail = (
 const checkRolesExisted = (req: Request, res: Response, next: NextFunction) => {
   if (req.body.roles) {
     for (let i = 0; i < req.body.roles.length; i++) {
-      if (!ROLE_CONST.includes(req.body.roles[i])) {
+      if (!ROLE.includes(req.body.roles[i])) {
         res.status(400).send({
           message: `Failed! Role ${req.body.roles[i]} does not exist! `,
         });

@@ -1,17 +1,18 @@
 version: "3.8"
 
 services:
-  app: &app
+  app:
     image: thuongtruong1009/boardly-api:latest
     build:
       context: .
-      dockerfile: ./docker/Dockerfile
+      dockerfile: ./Dockerfile
       target: development
     volumes:
       - .:/app
     networks:
       - mongo_network
-      - nginx_network
+    ports:
+      - 3000:3000
     depends_on:
       - mongo
     env_file:
@@ -19,36 +20,12 @@ services:
     restart: unless-stopped
     environment:
       MONGO_URL: mongodb://mongo/${DB_NAME}
-    command: npm run start:dev
-
-  app2:
-    <<: *app
-
-  nginx:
-    container_name: nginx
-    image: nginx:1.23.3-alpine
-    ports:
-      - ${APP_PORT}:80
-    environment:
-      - NGINX_HOST=127.0.0.1,localhost,0.0.0.0
-      - NGINX_PORT=80
-      - APP_HOST_1=app
-      - APP_HOST_2=app2
-      - APP_PORT=${APP_PORT}
-    volumes:
-      - ./docker/nginx/templates:/etc/nginx/templates
-    networks:
-      - nginx_network
-    depends_on:
-      - app
-      - app2
-    restart: unless-stopped
+    command: npm run start:docker
 
   mongo:
-    container_name: mongo
     image: mongo
     volumes:
-      - ./docker/mongo/data:/data/db
+      - ./.docker/mongo/data:/data/db
     ports:
       - 27017:27017
     networks:
@@ -57,4 +34,3 @@ services:
 
 networks:
   mongo_network:
-  nginx_network:

@@ -1,8 +1,8 @@
 import {
-  CATEGORY_CONST,
-  COLOR_CONST,
-  ROLE_CONST,
-  TAG_CONST,
+  CATEGORY,
+  COLOR,
+  ROLE,
+  TAG,
 } from "../constants";
 import db from "../models";
 import type { Error } from "mongoose";
@@ -10,7 +10,7 @@ import type { Error } from "mongoose";
 function initTag() {
   db.tag.estimatedDocumentCount((err: Error | null, count: number) => {
     if (!err && count === 0) {
-      TAG_CONST.forEach((tag: string) => {
+      TAG.forEach((tag: string) => {
         new db.tag({
           name: tag,
         }).save((err: Error | null) => {
@@ -27,7 +27,7 @@ function initTag() {
 function initRole() {
   db.role.estimatedDocumentCount((err: Error | null, count: number) => {
     if (!err && count === 0) {
-      ROLE_CONST.forEach((role: string) => {
+      ROLE.forEach((role: string) => {
         new db.role({
           name: role,
         }).save((err: Error | null) => {
@@ -44,7 +44,7 @@ function initRole() {
 function initCategory() {
   db.category.estimatedDocumentCount((err: Error | null, count: number) => {
     if (!err && count === 0) {
-      CATEGORY_CONST.forEach((category: string) => {
+      CATEGORY.forEach((category: string) => {
         new db.category({
           name: category,
         }).save((err: Error | null) => {
@@ -61,7 +61,7 @@ function initCategory() {
 function initColor() {
   db.color.estimatedDocumentCount((err: Error | null, count: number) => {
     if (!err && count === 0) {
-      COLOR_CONST.forEach((color: string) => {
+      COLOR.forEach((color: string) => {
         new db.color({
           name: `${color}`,
         }).save((err: Error | null) => {

@@ -1,4 +1,4 @@
-FROM node:18-alpine as development
+FROM node:20-alpine AS development
 
 WORKDIR /app
 
@@ -8,7 +8,7 @@ RUN npm install
 
 RUN npm run build
 
-FROM development as production
+FROM development AS production
 
 WORKDIR /app
 
@@ -20,7 +20,9 @@ COPY --chown=node:node ./package.json ./
 
 COPY --chown=node:node --from=development /app/dist /app/dist
 
-# RUN npm install
+RUN npm install --only=production
+
+EXPOSE 3000
 
 LABEL "maintainer"="thuongtruong1009 <thuongtruong@proton.me>"
 LABEL "org.opencontainers.image.authors"="Tran Nguyen Thuong Truong"

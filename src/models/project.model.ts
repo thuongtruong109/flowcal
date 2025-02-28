@@ -1,4 +1,4 @@
-import { E_COLLECTION } from "../enums";
+import { ENTITY } from "../constants";
 import mongoose from "mongoose";
 
 interface IProjectModel extends mongoose.Document {
@@ -23,7 +23,7 @@ interface IProjectModel extends mongoose.Document {
 const ProjectSchema = new mongoose.Schema({
   owner: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: E_COLLECTION.USER,
+    ref: ENTITY.USER,
     required: true,
   },
   type: {
@@ -49,7 +49,7 @@ const ProjectSchema = new mongoose.Schema({
   members: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: E_COLLECTION.USER,
+      ref: ENTITY.USER,
       default: [],
     },
   ],
@@ -74,7 +74,7 @@ const ProjectSchema = new mongoose.Schema({
   boards: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: E_COLLECTION.BOARD,
+      ref: ENTITY.BOARD,
     },
   ],
   startDate: {
@@ -88,7 +88,7 @@ const ProjectSchema = new mongoose.Schema({
 }).set("timestamps", true);
 
 const ProjectModel = mongoose.model<IProjectModel>(
-  E_COLLECTION.PROJECT,
+  ENTITY.PROJECT,
   ProjectSchema
 );
 

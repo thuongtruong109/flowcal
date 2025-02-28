@@ -76,14 +76,14 @@ const signup = async (req: Request, res: Response) => {
 const generateAccessToken = (user: IUser) => {
   return jwt.sign(
     { id: user.id, email: user.email },
-    envConf.ACCESS_TOKEN_KEY,
-    { expiresIn: envConf.ACCESS_TOKEN_LIFE }
+    envConf.accessTokenKey,
+    { expiresIn: envConf.accessTokenLife }
   );
 };
 
 const generateRefreshToken = (user: IUser) => {
-  return jwt.sign({ id: user, email: user.email }, envConf.REFRESH_TOKEN_KEY, {
-    expiresIn: envConf.REFRESH_TOKEN_LIFE,
+  return jwt.sign({ id: user, email: user.email }, envConf.refreshTokenKey, {
+    expiresIn: envConf.refreshTokenLife,
   });
 };
 
@@ -93,15 +93,15 @@ function sendConfirmationEmail(email: string) {
     service: "gmail",
     auth: {
       type: "OAuth2",
-      user: envConf.EMAIL_USERNAME,
-      pass: envConf.EMAIL_PASSWORD,
-      clientId: envConf.GOOGLE_CLIENT_ID,
-      clientSecret: envConf.GOOGLE_CLIENT_SECRET,
-      refreshToken: envConf.GOOGLE_REFRESH_TOKEN,
+      user: envConf.emailUsername,
+      pass: envConf.emailPassword,
+      clientId: envConf.googleClientId,
+      clientSecret: envConf.googleClientSecret,
+      refreshToken: envConf.googleRefreshToken,
     },
   } as any);
 
-  const token = jwt.sign({ email }, envConf.SECRET_KEY);
+  const token = jwt.sign({ email }, envConf.secretKey);
 
   return transporter.sendMail(confirmEmailMsg(email, token), (err, info) => {
     if (err) {
@@ -117,7 +117,7 @@ const verifyAccount = (req: Request, res: Response) => {
   try {
     const payload = jwt.verify(
       req.params.token,
-      envConf.ACCESS_TOKEN_SECRET
+      envConf.accessTokenSecret
     ) as any;
     email = payload.email;
   } catch {
@@ -205,7 +205,7 @@ const refreshToken = (req: Request, res: Response) => {
   if (!refreshTokens.includes(refreshToken))
     return res.status(403).send({ message: "Refresh token is not valid!" });
 
-  jwt.verify(refreshToken, envConf.REFRESH_TOKEN_KEY, (err: any, user: any) => {
+  jwt.verify(refreshToken, envConf.refreshTokenKey, (err: any, user: any) => {
     if (err)
       return res.status(403).send({ message: "Refresh token is not valid!" });
 

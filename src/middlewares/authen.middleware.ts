@@ -25,7 +25,7 @@ const verifyToken = (req: any, res: Response, next: NextFunction) => {
 
     jwt.verify(
       accessToken,
-      envConf.ACCESS_TOKEN_KEY,
+      envConf.accessTokenKey,
       (err: Error | null, decoded: IDecoded | any) => {
         if (err) {
           return res.status(401).send({ message: "Unauthorized!" });
@@ -68,39 +68,9 @@ const isAdmin = (req: any, res: Response, next: NextFunction) => {
   });
 };
 
-const isModerator = (req: any, res: Response, next: NextFunction) => {
-  User.findById(req.userId).exec((err: Error | null, user: IUser | any) => {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
-    }
-
-    Role.find(
-      {
-        _id: { $in: user.roles },
-      },
-      (err: Error, roles: Array<IRole>) => {
-        if (err) {
-          res.status(500).send({ message: err });
-          return;
-        }
-        for (let i = 0; i < roles.length; i++) {
-          if (roles[i].name === "moderator") {
-            next();
-            return;
-          }
-        }
-        res.status(403).send({ message: "Require Moderator Role!" });
-        return;
-      }
-    );
-  });
-};
-
 const verifyAuth = {
   verifyToken,
   isAdmin,
-  isModerator,
 };
 
 export default verifyAuth;
