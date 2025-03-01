@@ -10,13 +10,13 @@ export const envConf = {
     : "*",
   rateLimitMaxReq: process.env.RATE_LIMIT_MAX_REQUESTS
     ? Number.parseInt(process.env.RATE_LIMIT_MAX_REQUESTS)
-    : 500,
+    : 1000,
   rateLimitWinMs: process.env.RATE_LIMIT_WINDOW_MS
     ? Number.parseInt(process.env.RATE_LIMIT_WINDOW_MS)
     : 1,
 
-  dbName: process.env.DB_NAME || "boardly",
-  mongoUrl: process.env.MONGO_URL || "mongodb://localhost:27017/boardly",
+  dbName: process.env.DB_NAME || "flowcal",
+  mongoUrl: process.env.MONGO_URL || "mongodb://localhost:27017/flowcal",
 
   secretKey: process.env.SECRET_KEY || "secret-key",
   accessTokenSecret: process.env.ACCESS_TOKEN_SECRET || "access-token-secret",

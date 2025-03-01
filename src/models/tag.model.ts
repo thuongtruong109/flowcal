@@ -12,8 +12,7 @@ const tagSchema: mongoose.Schema = new mongoose.Schema({
     unique: true,
   },
   color: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: ENTITY.COLOR,
+    type: String,
     required: true,
   },
 });

@@ -1,11 +1,11 @@
-# 🚀 Boardly
+# 🚀 flowcal
 
-[![CI](https://github.com/thuongtruong109/boardly/actions/workflows/ci.yml/badge.svg)](https://github.com/thuongtruong109/boardly/actions/workflows/ci.yml)
-[![CD](https://github.com/thuongtruong109/boardly/actions/workflows/cd.yml/badge.svg)](https://github.com/thuongtruong109/boardly/actions/workflows/cd.yml)
+[![CI](https://github.com/thuongtruong109/flowcal/actions/workflows/ci.yml/badge.svg)](https://github.com/thuongtruong109/flowcal/actions/workflows/ci.yml)
+[![CD](https://github.com/thuongtruong109/flowcal/actions/workflows/cd.yml/badge.svg)](https://github.com/thuongtruong109/flowcal/actions/workflows/cd.yml)
 
-<!-- [![Test](https://github.com/thuongtruong109/boardly/actions/workflows/test.yml/badge.svg)](https://github.com/thuongtruong109/boardly/actions/workflows/test.yml)
-[![Code Quality](https://github.com/thuongtruong109/boardly/actions/workflows/code-quality.yml/badge.svg)](https://github.com/thuongtruong109/boardly/actions/workflows/code-quality.yml)
-[![Docker Image CI](https://github.com/thuongtruong109/boardly/actions/workflows/docker-image.yml/badge.svg)](https://github.com/thuongtruong109/boardly/actions/workflows/docker-image.yml) -->
+<!-- [![Test](https://github.com/thuongtruong109/flowcal/actions/workflows/test.yml/badge.svg)](https://github.com/thuongtruong109/flowcal/actions/workflows/test.yml)
+[![Code Quality](https://github.com/thuongtruong109/flowcal/actions/workflows/code-quality.yml/badge.svg)](https://github.com/thuongtruong109/flowcal/actions/workflows/code-quality.yml)
+[![Docker Image CI](https://github.com/thuongtruong109/flowcal/actions/workflows/docker-image.yml/badge.svg)](https://github.com/thuongtruong109/flowcal/actions/workflows/docker-image.yml) -->
 
 ```code
 Hey There! 🙌
@@ -47,8 +47,8 @@ This boilerplate aims to:
 
 #### Step 1: 🚀 Initial Setup
 
-- Clone the repository: `git clone https://github.com/thuongtruong109/boardly.git`
-- Navigate: `cd boardly`
+- Clone the repository: `git clone https://github.com/thuongtruong109/flowcal.git`
+- Navigate: `cd flowcal`
 - Install dependencies: `npm ci`
 
 #### Step 2: ⚙️ Environment Configuration

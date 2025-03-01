@@ -12,12 +12,12 @@ export const TAG: Array<string> = [
 ];
 
 export const COLOR: Array<string> = [
+    "#DDDDDA",
     "#FFDCA2",
     "#E4C7B7",
     "#BCE6FF",
     "#F9E2AE",
     "#E8B7D4",
-    "#DDDDDA",
     "#E0ECDE",
     "#FFCAD4",
     "#CFF4D2",
