@@ -1,20 +1,16 @@
-import db from "../../models";
+
 import type { Request, Response } from "express";
 import * as object from "mongoose";
-import cardController from "./card.controller";
+import { BoardModel, CardModel, ProjectModel, TagModel } from "../../models";
 
 const ObjectId = object.Types.ObjectId;
-const Project = db.project;
-const Board = db.board;
-const Card = db.card;
-const Tag = db.tag;
 
 const createBoard = async (req: Request, res: Response): Promise<void> => {
   try {
-    const board = new Board(req.body);
+    const board = new BoardModel(req.body);
     const savedBoard = await board.save();
 
-    await Project.updateMany(
+    await ProjectModel.updateMany(
       { _id: req.body.projectId },
       { $push: { projects: savedBoard._id } }
     );
@@ -27,7 +23,7 @@ const createBoard = async (req: Request, res: Response): Promise<void> => {
 
 const getAllBoards = async (req: Request, res: Response): Promise<void> => {
   try {
-    const boards = await Board.find(
+    const boards = await BoardModel.find(
       { projectId: req.params.projectId },
       "name isFavorite background updatedAt"
     );
@@ -42,7 +38,7 @@ const getListBoardsName = async (
   res: Response
 ): Promise<void> => {
   try {
-    const boards = await Board.find(
+    const boards = await BoardModel.find(
       { projectId: req.params.projectId },
       "name"
     );
@@ -54,7 +50,7 @@ const getListBoardsName = async (
 
 const getBoardById = async (req: Request, res: Response): Promise<void> => {
   try {
-    const board = await Board.findById(
+    const board = await BoardModel.findById(
       req.params.id,
       "_id projectId name isFavorite customBackground"
     ).populate("background", "name");
@@ -63,7 +59,7 @@ const getBoardById = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    const cards = await Card.aggregate([
+    const cards = await CardModel.aggregate([
       {
         $match: {
           boardId: new ObjectId(req.params.id),
@@ -109,12 +105,12 @@ const getBoardById = async (req: Request, res: Response): Promise<void> => {
 
 const getBoardInfoById = async (req: Request, res: Response): Promise<void> => {
   try {
-    const board = await Board.findById(
+    const board = await BoardModel.findById(
       req.params.id,
       "name description createdAt updatedAt"
     );
 
-    const groupCardByTag = await Card.aggregate([
+    const groupCardByTag = await CardModel.aggregate([
       {
         $match: {
           boardId: new ObjectId(req.params.id),
@@ -128,8 +124,8 @@ const getBoardInfoById = async (req: Request, res: Response): Promise<void> => {
       },
       { $sort: { _id: 1 } },
     ]);
-    await Tag.populate(groupCardByTag, { path: "_id", select: "-name -__v" });
-    const groupCardByStatus = await Card.aggregate([
+    await TagModel.populate(groupCardByTag, { path: "_id", select: "-name -__v" });
+    const groupCardByStatus = await CardModel.aggregate([
       {
         $match: {
           boardId: new ObjectId(req.params.id),
@@ -144,7 +140,7 @@ const getBoardInfoById = async (req: Request, res: Response): Promise<void> => {
       { $sort: { _id: 1 } },
     ]);
 
-    const totalCard = await Card.countDocuments({ boardId: req.params.id });
+    const totalCard = await CardModel.countDocuments({ boardId: req.params.id });
     const totalTag = groupCardByTag.length;
     const totalStatus = groupCardByTag.length;
 
@@ -170,7 +166,7 @@ const getBoardInfoById = async (req: Request, res: Response): Promise<void> => {
 const updateBoard = async (req: Request, res: Response): Promise<void> => {
   try {
     // await Board.updateOne({ _id: req.params.id }, { $set: req.body });
-    const updated = await Board.findByIdAndUpdate(req.params.id, req.body, {
+    const updated = await BoardModel.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
     res.status(200).send(updated);
@@ -181,13 +177,13 @@ const updateBoard = async (req: Request, res: Response): Promise<void> => {
 
 const deleteBoard = async (req: Request, res: Response): Promise<void> => {
   try {
-    await Project.updateMany(
+    await ProjectModel.updateMany(
       { Boards: req.params.id },
       { $pull: { Boards: req.params.id } }
     );
-    await Card.deleteMany({ BoardId: req.params.id });
+    await CardModel.deleteMany({ BoardId: req.params.id });
 
-    await Board.deleteOne({ _id: req.params.id });
+    await BoardModel.deleteOne({ _id: req.params.id });
 
     res.status(200).send({ message: "Board has been deleted!" });
   } catch (error) {

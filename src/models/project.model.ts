@@ -1,34 +1,11 @@
 import { ENTITY } from "../constants";
 import mongoose from "mongoose";
 
-interface IProjectModel extends mongoose.Document {
-  owner: mongoose.Schema.Types.ObjectId;
-  type: string;
-  name: string;
-  access: string;
-  description: string;
-  categoryId: string;
-  members: mongoose.Schema.Types.ObjectId[];
-  isFavorite: boolean;
-  background: string;
-  customBackground: string;
-  props: {
-    orientation: string;
-  };
-  boards: mongoose.Schema.Types.ObjectId[];
-  startDate: Date;
-  endDate: Date;
-}
-
-const ProjectSchema = new mongoose.Schema({
+const projectSchema = new mongoose.Schema({
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: ENTITY.USER,
     required: true,
-  },
-  type: {
-    type: String,
-    default: "container",
   },
   name: {
     type: String,
@@ -41,10 +18,6 @@ const ProjectSchema = new mongoose.Schema({
   description: {
     type: String,
     default: "",
-  },
-  categoryId: {
-    type: String,
-    required: true,
   },
   members: [
     {
@@ -65,18 +38,6 @@ const ProjectSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
-  props: {
-    orientation: {
-      type: String,
-      default: "horizontal",
-    },
-  },
-  boards: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: ENTITY.BOARD,
-    },
-  ],
   startDate: {
     type: Date,
     default: Date.now(),
@@ -87,9 +48,10 @@ const ProjectSchema = new mongoose.Schema({
   },
 }).set("timestamps", true);
 
+type IProjectModel = mongoose.InferSchemaType<typeof projectSchema> & Document;
 const ProjectModel = mongoose.model<IProjectModel>(
   ENTITY.PROJECT,
-  ProjectSchema
+  projectSchema
 );
 
 export default ProjectModel;

@@ -2,18 +2,15 @@ import type { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { Error } from "mongoose";
 import nodemailer from "nodemailer";
-import { confirmEmailMsg } from "../../helpers/email.helper";
-import type { IRole, IUser } from "../../types";
-import { comparePassword, hashPassword } from "../../utils/hash";
+import { confirmEmailMsg } from "../../utils/email.util";
+import type { IRoleDto, IUser } from "../../types";
+import { comparePassword, hashPassword } from "../../helpers/hash";
 import { envConf } from "../../configs/env.config";
-import db from "../../models";
-
-const User = db.user;
-const Role = db.role;
+import { UserModel, RoleModel } from "../../models";
 
 const signup = async (req: Request, res: Response) => {
   const key = await hashPassword(req.body.password);
-  const user = new User({
+  const user = new UserModel({
     username: req.body.username,
     email: req.body.email,
     avatar: req.body.avatar,
@@ -27,16 +24,16 @@ const signup = async (req: Request, res: Response) => {
       return;
     }
     if (req.body.roles) {
-      Role.find(
+      RoleModel.find(
         {
           name: { $in: req.body.roles },
         },
-        (err: Error, roles: Array<IRole>) => {
+        (err: Error, roles: Array<IRoleDto>) => {
           if (err) {
             res.status(500).send({ message: err });
             return;
           }
-          user.roles = roles.map((role: IRole) => role._id);
+          user.roles = roles.map((role: IRoleDto) => role._id);
           user.save((err: Error) => {
             if (err) {
               res.status(500).send({ message: err });
@@ -48,11 +45,11 @@ const signup = async (req: Request, res: Response) => {
         }
       );
     } else {
-      Role.findOne(
+      RoleModel.findOne(
         {
           name: "user",
         },
-        (err: Error, role: IRole) => {
+        (err: Error, role: IRoleDto) => {
           if (err) {
             res.status(500).send({ message: err });
             return;
@@ -66,7 +63,7 @@ const signup = async (req: Request, res: Response) => {
             }
             res.send({ message: "User was registered successfully!" });
           });
-          sendConfirmationEmail(user.email);
+          // sendConfirmationEmail(user.email);
         }
       );
     }
@@ -123,7 +120,7 @@ const verifyAccount = (req: Request, res: Response) => {
   } catch {
     throw new Error("Invalid Token");
   }
-  User.findOne({ email: email }, (err: Error, user: IUser | any) => {
+  UserModel.findOne({ email: email }, (err: Error, user: IUser | any) => {
     if (err) {
       res.status(500).send({ message: err });
       return;
@@ -145,7 +142,7 @@ const verifyAccount = (req: Request, res: Response) => {
 
 let refreshTokens: Array<string> = [];
 const signin = (req: Request, res: Response) => {
-  User.findOne({
+  UserModel.findOne({
     username: req.body.username,
   })
     .populate("roles", "-__v")

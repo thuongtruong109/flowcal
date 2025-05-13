@@ -4,15 +4,17 @@ import {
   ROLE,
   TAG,
 } from "../constants";
-import db from "../models";
 import type { Error } from "mongoose";
+import type { ITag } from '../types'
+import { CategoryModel, ColorModel, RoleModel, TagModel } from "../models";
 
 function initTag() {
-  db.tag.estimatedDocumentCount((err: Error | null, count: number) => {
+  TagModel.estimatedDocumentCount((err: Error | null, count: number) => {
     if (!err && count === 0) {
-      TAG.forEach((tag: string) => {
-        new db.tag({
-          name: tag,
+      TAG.forEach((tag: ITag) => {
+        new TagModel({
+          name: tag.name,
+          color: tag.color
         }).save((err: Error | null) => {
           if (err) {
             console.log("error", err);
@@ -25,10 +27,10 @@ function initTag() {
 }
 
 function initRole() {
-  db.role.estimatedDocumentCount((err: Error | null, count: number) => {
+  RoleModel.estimatedDocumentCount((err: Error | null, count: number) => {
     if (!err && count === 0) {
       ROLE.forEach((role: string) => {
-        new db.role({
+        new RoleModel({
           name: role,
         }).save((err: Error | null) => {
           if (err) {
@@ -42,10 +44,10 @@ function initRole() {
 }
 
 function initCategory() {
-  db.category.estimatedDocumentCount((err: Error | null, count: number) => {
+  CategoryModel.estimatedDocumentCount((err: Error | null, count: number) => {
     if (!err && count === 0) {
       CATEGORY.forEach((category: string) => {
-        new db.category({
+        new CategoryModel({
           name: category,
         }).save((err: Error | null) => {
           if (err) {
@@ -59,10 +61,10 @@ function initCategory() {
 }
 
 function initColor() {
-  db.color.estimatedDocumentCount((err: Error | null, count: number) => {
+  ColorModel.estimatedDocumentCount((err: Error | null, count: number) => {
     if (!err && count === 0) {
       COLOR.forEach((color: string) => {
-        new db.color({
+        new ColorModel({
           name: `${color}`,
         }).save((err: Error | null) => {
           if (err) {
@@ -76,8 +78,8 @@ function initColor() {
 }
 
 export default function initSampleSeed() {
-  initColor();
   initRole();
+  initColor();
   initTag();
   initCategory();
 }

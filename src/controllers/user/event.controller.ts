@@ -1,14 +1,11 @@
 import type { Request, Response } from "express";
-import db from "../../models";
-import { queryDateTimePeriod } from "../../utils";
-
-const User = db.user;
-const Event = db.event;
+import { UserModel, EventModel } from "../../models";
+import { queryDateTimePeriod } from "../../helpers";
 
 const createEvent = async (req: any, res: Response) => {
   try {
-    const event = await Event.create({ organizer: req.user.id, ...req.body });
-    await User.updateOne(
+    const event = await EventModel.create({ organizer: req.user.id, ...req.body });
+    await UserModel.updateOne(
       { _id: req.user.id },
       { $push: { events: event._id } }
     );
@@ -22,11 +19,11 @@ const createEvent = async (req: any, res: Response) => {
 const getAllEvents = async (req: any, res: Response) => {
   try {
     if (req.query.present === "organizer") {
-      const total = await Event.countDocuments(
+      const total = await EventModel.countDocuments(
         { organizer: req.user.id },
         { "time.date": queryDateTimePeriod(req.query.start, req.query.end) }
       );
-      const events = await Event.find(
+      const events = await EventModel.find(
         {
           "time.date": queryDateTimePeriod(req.query.start, req.query.end),
         },
@@ -35,11 +32,11 @@ const getAllEvents = async (req: any, res: Response) => {
       res.status(200).send({ total, events });
     }
     if (req.query.present === "participant") {
-      const total = await Event.countDocuments(
+      const total = await EventModel.countDocuments(
         { attendees: { $in: req.user.id } },
         { "time.date": queryDateTimePeriod(req.query.start, req.query.end) }
       );
-      const events = await Event.find(
+      const events = await EventModel.find(
         { attendees: { $in: req.user.id } },
         { "time.date": queryDateTimePeriod(req.query.start, req.query.end) },
         "title time updatedAt" as any
@@ -53,7 +50,7 @@ const getAllEvents = async (req: any, res: Response) => {
 
 const getEventById = async (req: any, res: Response) => {
   try {
-    const event = await Event.findById(req.params.id)
+    const event = await EventModel.findById(req.params.id)
       .populate("colorId", "name")
       .populate("organizer", "username avatar")
       .populate("attendees", "username avatar");
@@ -65,7 +62,7 @@ const getEventById = async (req: any, res: Response) => {
 
 const updateEvent = async (req: Request, res: Response) => {
   try {
-    const event = await Event.findByIdAndUpdate(
+    const event = await EventModel.findByIdAndUpdate(
       { _id: req.params.id },
       { ...req.body },
       { new: true }
@@ -78,8 +75,8 @@ const updateEvent = async (req: Request, res: Response) => {
 
 const deleteEvent = async (req: any, res: Response) => {
   try {
-    await Event.findByIdAndDelete(req.params.id);
-    await User.updateOne(
+    await EventModel.findByIdAndDelete(req.params.id);
+    await UserModel.updateOne(
       { _id: req.user.id },
       { $pull: { events: req.params.id } }
     );

@@ -1,11 +1,9 @@
 import type { Request, Response } from "express";
-import db from "../../models";
-const Board = db.board;
-const Tag = db.tag;
+import { BoardModel, TagModel } from "../../models";
 
 const createTag = async (req: Request, res: Response): Promise<void> => {
   try {
-    const newTag = new Tag(req.body);
+    const newTag = new TagModel(req.body);
     await newTag.save();
     res.status(200).send(newTag);
   } catch (error) {
@@ -15,7 +13,7 @@ const createTag = async (req: Request, res: Response): Promise<void> => {
 
 const getAllTags = async (req: Request, res: Response): Promise<void> => {
   try {
-    const tags = await Tag.find();
+    const tags = await TagModel.find();
     res.status(200).send(tags);
   } catch (error) {
     res.status(500).send({ message: error });
@@ -24,7 +22,7 @@ const getAllTags = async (req: Request, res: Response): Promise<void> => {
 
 const updateTag = async (req: Request, res: Response) => {
   try {
-    const updated = await Tag.findByIdAndUpdate(
+    const updated = await TagModel.findByIdAndUpdate(
       req.params.id,
       { $set: { name: req.body.name } },
       { new: true }
@@ -37,11 +35,11 @@ const updateTag = async (req: Request, res: Response) => {
 
 const deleteTag = async (req: Request, res: Response): Promise<void> => {
   try {
-    await Board.updateMany(
+    await BoardModel.updateMany(
       { cards: { tags: req.params.id } },
       { $set: { cards: { tags: null } } }
     );
-    await Tag.findByIdAndDelete(req.params.id);
+    await TagModel.findByIdAndDelete(req.params.id);
     res.status(200).send({ message: "Tag deleted" });
   } catch (error) {
     res.status(500).send({ message: error });

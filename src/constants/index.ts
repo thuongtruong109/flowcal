@@ -1,14 +1,51 @@
-export const CATEGORY: Array<string> = ["kanban", "todo", "note"];
+import type { ITag } from '../types'
+
+export const ENTITY = {
+    ROLE: "Role",
+    USER: "User",
+    PROJECT: "Project",
+    CATEGORY: "Category",
+    EVENT: "Event",
+    TAG: "Tag",
+    COLOR: "Color",
+    CARD: "Card",
+    TODO: "Todo",
+    NOTE: "Note",
+    STATUS: "Status",
+
+    BOARD: "Board",
+};
 
 export const ROLE: Array<string> = ["admin", "user"];
 
-export const TAG: Array<string> = [
-    "family",
-    "work",
-    "study",
-    "hobby",
-    "friend",
-    "secret",
+export const CATEGORY: Array<string> = ["kanban", "todo", "note"];
+
+export const TAG: Array<ITag> = [
+    {
+        name: "family",
+        color: "#DDDDDA"
+    },
+    {
+        name: "work",
+        color: "#FFDCA2"
+    },
+    {
+        name: "study",
+        color: "#E4C7B7"
+    },
+    {
+        name: "hobby",
+        color: "#BCE6FF"
+
+    },
+    {
+        name: "friend",
+        color: "#F9E2AE"
+    },
+    {
+        name: "secret",
+        color: "#E8B7D4"
+    }
 ];
 
 export const COLOR: Array<string> = [
@@ -23,15 +60,3 @@ export const COLOR: Array<string> = [
     "#CFF4D2",
     "#F5CEC7",
 ];
-
-export const ENTITY = {
-    USER: "User",
-    ROLE: "Role",
-    PROJECT: "Project",
-    EVENT: "Event",
-    TAG: "Tag",
-    COLOR: "Color",
-    BOARD: "Board",
-    CATEGORY: "Category",
-    CARD: "Card",
-};

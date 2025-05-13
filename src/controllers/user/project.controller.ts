@@ -1,17 +1,12 @@
 import type { Request, Response } from "express";
-import db from "../../models";
-
-const User = db.user;
-const Project = db.project;
-const Board = db.board;
-const Card = db.card;
+import { UserModel, ProjectModel, BoardModel, CardModel } from "../../models";
 
 const createProject = async (req: any, res: Response): Promise<void> => {
   try {
-    const project = new Project({ owner: req.user.id, ...req.body });
+    const project = new ProjectModel({ owner: req.user.id, ...req.body });
     const savedProject = await project.save();
 
-    await User.updateMany(
+    await UserModel.updateMany(
       { _id: req.user.id },
       { $push: { projects: savedProject._id } }
     );
@@ -27,17 +22,17 @@ const getAllProjects = async (req: any, res: Response): Promise<void> => {
     const access: string = req.query.access;
 
     if (access === "all") {
-      const total = await Project.countDocuments({
+      const total = await ProjectModel.countDocuments({
         owner: req.user.id,
       });
-      const projects = await Project.find(
+      const projects = await ProjectModel.find(
         {
           owner: req.user.id,
         },
         "_id props members isFavorite name access categoryId createdAt",
         { sort: { createdAt: -1 }, skip: 0, limit: req.query.limit }
       );
-      const lastUpdated = await Project.find(
+      const lastUpdated = await ProjectModel.find(
         {
           owner: req.user.id,
         },
@@ -48,11 +43,11 @@ const getAllProjects = async (req: any, res: Response): Promise<void> => {
       return;
     }
 
-    const total = await Project.countDocuments({
+    const total = await ProjectModel.countDocuments({
       owner: req.user.id,
       access: access,
     });
-    const projects = await Project.find(
+    const projects = await ProjectModel.find(
       {
         owner: req.user.id,
         access: access,
@@ -60,7 +55,7 @@ const getAllProjects = async (req: any, res: Response): Promise<void> => {
       "_id props members isFavorite name access categoryId createdAt",
       { sort: { createdAt: -1 }, skip: 0, limit: req.query.limit }
     );
-    const lastUpdated = await Project.find(
+    const lastUpdated = await ProjectModel.find(
       {
         owner: req.user.id,
         access: access,
@@ -76,7 +71,7 @@ const getAllProjects = async (req: any, res: Response): Promise<void> => {
 
 const getProjectById = async (req: Request, res: Response): Promise<void> => {
   try {
-    const project = await Project.findById(req.params.id).populate(
+    const project = await ProjectModel.findById(req.params.id).populate(
       "owner",
       "_id username"
     );
@@ -88,7 +83,7 @@ const getProjectById = async (req: Request, res: Response): Promise<void> => {
 
 const updateProject = async (req: Request, res: Response): Promise<void> => {
   try {
-    const project = await Project.findByIdAndUpdate(req.params.id, req.body, {
+    const project = await ProjectModel.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
     res.status(200).send(project);
@@ -99,17 +94,17 @@ const updateProject = async (req: Request, res: Response): Promise<void> => {
 
 const deleteProject = async (req: Request, res: Response): Promise<void> => {
   try {
-    const findBoards = await Board.find({ projectId: req.params.id });
+    const findBoards = await BoardModel.find({ projectId: req.params.id });
     if (findBoards.length > 0) {
       findBoards.forEach(async (Board) => {
-        await Card.deleteMany({ boardId: Board._id });
+        await CardModel.deleteMany({ boardId: Board._id });
       });
-      await Board.deleteMany({ projectId: req.params.id });
+      await BoardModel.deleteMany({ projectId: req.params.id });
     }
 
-    await Project.findByIdAndDelete(req.params.id);
+    await ProjectModel.findByIdAndDelete(req.params.id);
 
-    await User.updateMany(
+    await UserModel.updateMany(
       { projects: req.params.id },
       { $pull: { projects: req.params.id } }
     );

@@ -1,20 +1,6 @@
 import mongoose from "mongoose";
 import { ENTITY } from "../constants";
 
-interface IEventModel extends mongoose.Document {
-  organizer: mongoose.Schema.Types.ObjectId;
-  title: string;
-  description: string;
-  time: {
-    start: string;
-    end: string;
-    date: Date;
-  };
-  location: string;
-  attendees: string[];
-  colorId: mongoose.Schema.Types.ObjectId;
-}
-
 const eventSchema: mongoose.Schema = new mongoose.Schema({
   organizer: {
     type: mongoose.Schema.Types.ObjectId,
@@ -61,6 +47,11 @@ const eventSchema: mongoose.Schema = new mongoose.Schema({
   },
 }).set("timestamps", true);
 
+// eventSchema.index({ organizer: 1, time: 1 }, { unique: true });
+// eventSchema.index({ title: 1, time: 1 }, { unique: true });
+// eventSchema.index({ attendees: 1, time: 1 }, { unique: true });
+
+type IEventModel = mongoose.InferSchemaType<typeof eventSchema> & Document;
 const EventModel = mongoose.model<IEventModel>(ENTITY.EVENT, eventSchema);
 
 export default EventModel;

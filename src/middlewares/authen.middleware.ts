@@ -2,11 +2,8 @@ import type { Response, NextFunction } from "express";
 import type { Error } from "mongoose";
 import type { IDecoded, IRole, IUser } from "../types";
 import jwt from "jsonwebtoken";
-import db from "../models";
+import { UserModel, RoleModel } from "../models";
 import { envConf } from "../configs/env.config";
-
-const User = db.user;
-const Role = db.role;
 
 const verifyToken = (req: any, res: Response, next: NextFunction) => {
   if (req.method === "OPTIONS") {
@@ -40,12 +37,12 @@ const verifyToken = (req: any, res: Response, next: NextFunction) => {
 };
 
 const isAdmin = (req: any, res: Response, next: NextFunction) => {
-  User.findById(req.userId).exec((err: Error | null, user: IUser | any) => {
+  UserModel.findById(req.userId).exec((err: Error | null, user: IUser | any) => {
     if (err) {
       res.status(500).send({ message: err });
       return;
     }
-    Role.find(
+    RoleModel.find(
       {
         _id: { $in: user.roles },
       },

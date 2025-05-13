@@ -1,11 +1,7 @@
 import mongoose from "mongoose";
 import { ENTITY } from "../constants";
 
-interface IColorModel extends mongoose.Document {
-  name: string;
-}
-
-const ColorSchema: mongoose.Schema = new mongoose.Schema({
+const colorSchema: mongoose.Schema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -14,6 +10,7 @@ const ColorSchema: mongoose.Schema = new mongoose.Schema({
   },
 });
 
-const ColorModel = mongoose.model<IColorModel>(ENTITY.COLOR, ColorSchema);
+type IColorModel = mongoose.InferSchemaType<typeof colorSchema> & Document;
+const ColorModel = mongoose.model<IColorModel>(ENTITY.COLOR, colorSchema);
 
 export default ColorModel;

@@ -1,21 +1,12 @@
 import type { Request, Response } from "express";
-import db from "../../models";
-
-const Tag = db.tag;
-const User = db.user;
-const Project = db.project;
-const Board = db.board;
-const Card = db.card;
-const Color = db.color;
-const Role = db.role;
-const Category = db.category;
+import { BoardModel, CardModel, CategoryModel, ColorModel, ProjectModel, TagModel, UserModel } from "../../models";
 
 const getOverview = async (req: Request, res: Response): Promise<void> => {
   try {
     switch (req.query.scope) {
       case "card": {
-        const totalCards = await Card.countDocuments();
-        const groupCards = await Card.aggregate([
+        const totalCards = await CardModel.countDocuments();
+        const groupCards = await CardModel.aggregate([
           {
             $group: {
               _id: "$id",
@@ -27,8 +18,8 @@ const getOverview = async (req: Request, res: Response): Promise<void> => {
         break;
       }
       case "board": {
-        const totalBoards = await Board.countDocuments();
-        const groupBoards = await Board.aggregate([
+        const totalBoards = await BoardModel.countDocuments();
+        const groupBoards = await BoardModel.aggregate([
           {
             $group: {
               _id: "$projectId",
@@ -40,8 +31,8 @@ const getOverview = async (req: Request, res: Response): Promise<void> => {
         break;
       }
       case "project": {
-        const totalProject = await Project.countDocuments();
-        const projects = await Project.aggregate([
+        const totalProject = await ProjectModel.countDocuments();
+        const projects = await ProjectModel.aggregate([
           {
             $group: {
               _id: "$owner",
@@ -53,8 +44,8 @@ const getOverview = async (req: Request, res: Response): Promise<void> => {
         break;
       }
       case "tag": {
-        const totalTags = await Tag.countDocuments();
-        const groupTags = await Tag.aggregate([
+        const totalTags = await TagModel.countDocuments();
+        const groupTags = await TagModel.aggregate([
           {
             $group: {
               _id: "$_id",
@@ -67,8 +58,8 @@ const getOverview = async (req: Request, res: Response): Promise<void> => {
         break;
       }
       case "color": {
-        const totalColors = await Color.countDocuments();
-        const groupColors = await Color.aggregate([
+        const totalColors = await ColorModel.countDocuments();
+        const groupColors = await ColorModel.aggregate([
           {
             $group: {
               _id: "$_id",
@@ -81,8 +72,8 @@ const getOverview = async (req: Request, res: Response): Promise<void> => {
         break;
       }
       case "category": {
-        const totalCategories = await Category.countDocuments();
-        const groupCategories = await Category.aggregate([
+        const totalCategories = await CategoryModel.countDocuments();
+        const groupCategories = await CategoryModel.aggregate([
           {
             $group: {
               _id: "$_id",
@@ -97,8 +88,8 @@ const getOverview = async (req: Request, res: Response): Promise<void> => {
         break;
       }
       default: {
-        const totalUsers = await User.countDocuments();
-        const groupUsers = await User.aggregate([
+        const totalUsers = await UserModel.countDocuments();
+        const groupUsers = await UserModel.aggregate([
           {
             $group: {
               _id: "$roles",

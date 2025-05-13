@@ -4,7 +4,7 @@ import { envConf } from "./env.config";
 import ErrorHandler from "../middlewares/error.middleware";
 import { rateLimiterMiddleware } from "../middlewares/rate.middleware";
 import type { IRouter } from "../types";
-import { capitializeString } from "../utils";
+import { capitializeString } from "../helpers";
 import compression from "compression";
 import cookieParser from "cookie-parser";
 import cors from "cors";

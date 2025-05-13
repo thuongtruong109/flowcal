@@ -1,14 +1,10 @@
 import mongoose from "mongoose";
 import { ENTITY } from "../constants";
 
-const cardSchema: mongoose.Schema = new mongoose.Schema({
+const noteSchema: mongoose.Schema = new mongoose.Schema({
   projectId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: ENTITY.PROJECT,
-    required: true,
-  },
-  status: {
-    type: String,
     required: true,
   },
   icon: {
@@ -18,15 +14,20 @@ const cardSchema: mongoose.Schema = new mongoose.Schema({
   text: {
     type: String,
     required: true,
+    maxlength: 1000,
   },
   tagId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: ENTITY.TAG,
     required: false,
   },
+  lastUpdated: {
+    type: Date,
+    default: Date.now,
+  },
 }).set("timestamps", true);
 
-type ICardModel = mongoose.InferSchemaType<typeof cardSchema> & Document;
-const CardModel = mongoose.model<ICardModel>(ENTITY.CARD, cardSchema);
+type INoteModel = mongoose.InferSchemaType<typeof noteSchema> & Document;
+const NoteModel = mongoose.model<INoteModel>(ENTITY.NOTE, noteSchema);
 
-export default CardModel;
+export default NoteModel;
