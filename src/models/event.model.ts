@@ -45,6 +45,7 @@ const eventSchema: mongoose.Schema = new mongoose.Schema({
     ref: ENTITY.COLOR,
     required: true,
   },
+  __v: { type: Number, select: false },
 }).set("timestamps", true);
 
 // eventSchema.index({ organizer: 1, time: 1 }, { unique: true });

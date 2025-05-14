@@ -8,6 +8,7 @@ const colorSchema: mongoose.Schema = new mongoose.Schema({
     unique: true,
     max: 8,
   },
+  __v: { type: Number, select: false },
 });
 
 type IColorModel = mongoose.InferSchemaType<typeof colorSchema> & Document;

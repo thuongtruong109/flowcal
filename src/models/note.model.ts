@@ -21,10 +21,7 @@ const noteSchema: mongoose.Schema = new mongoose.Schema({
     ref: ENTITY.TAG,
     required: false,
   },
-  lastUpdated: {
-    type: Date,
-    default: Date.now,
-  },
+  __v: { type: Number, select: false },
 }).set("timestamps", true);
 
 type INoteModel = mongoose.InferSchemaType<typeof noteSchema> & Document;

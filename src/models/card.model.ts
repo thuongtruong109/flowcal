@@ -7,8 +7,9 @@ const cardSchema: mongoose.Schema = new mongoose.Schema({
     ref: ENTITY.PROJECT,
     required: true,
   },
-  status: {
-    type: String,
+  statusId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: ENTITY.STATUS,
     required: true,
   },
   icon: {
@@ -24,6 +25,7 @@ const cardSchema: mongoose.Schema = new mongoose.Schema({
     ref: ENTITY.TAG,
     required: false,
   },
+  __v: { type: Number, select: false },
 }).set("timestamps", true);
 
 type ICardModel = mongoose.InferSchemaType<typeof cardSchema> & Document;

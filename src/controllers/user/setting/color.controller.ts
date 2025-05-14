@@ -1,6 +1,6 @@
 import { unlink } from "node:fs/promises";
 import type { Request, Response } from "express";
-import { BoardModel, CardModel, ColorModel, ProjectModel, TagModel, UserModel } from "../../models";
+import { BoardModel, CardModel, ColorModel, ProjectModel, TagModel, UserModel } from "../../../models";
 
 const uploadSingleResource = async (req: any, res: Response) => {
   try {
@@ -59,7 +59,7 @@ const getColorCollection = async (req: Request, res: Response) => {
 
 const getTagCollection = async (req: Request, res: Response) => {
   try {
-    const tags = await TagModel.find().populate("color", "-__v").select("-__v");
+    const tags = await TagModel.find().populate("color");
     res.status(200).send(tags);
   } catch (error) {
     res.status(500).send(error);

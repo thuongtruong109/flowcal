@@ -6,6 +6,7 @@ const roleSchema: mongoose.Schema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  __v: { type: Number, select: false },
 });
 
 type IRoleModel = mongoose.InferSchemaType<typeof roleSchema> & Document;

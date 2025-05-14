@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { CardModel, BoardModel } from "../../models";
+import { CardModel, BoardModel, ProjectModel } from "../../models";
 
 const getAllCards = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -32,22 +32,23 @@ const getCardById = async (req: Request, res: Response): Promise<void> => {
 
 const createCard = async (req: Request, res: Response): Promise<void> => {
   try {
-    const existed = await BoardModel.findById(req.body.boardId);
+    const existed = await ProjectModel.findById(req.body.projectId);
     if (!existed) {
-      res.status(404).send({ message: "Board not found" });
+      res.status(404).send({ message: "Project not found" });
     }
     const card = new CardModel(req.body);
-    const savedCard = await card.save();
+    await card.save();
 
-    await BoardModel.updateMany(
-      { _id: req.body.boardId },
-      { $push: { cards: savedCard._id } }
-    );
+    // const savedCard = await card.save();
+    // await ProjectModel.updateMany(
+    //   { _id: req.body.projectId },
+    //   { $push: { cards: savedCard._id } }
+    // );
 
-    const updated = await BoardModel.findById(savedCard.boardId, "cards").populate(
-      "cards"
-    );
-    res.status(200).send(updated);
+    // const updated = await ProjectModel.findById(req.body.projectId, "cards").populate(
+    //   "cards"
+    // );
+    res.status(200).send(card);
   } catch (error) {
     res.status(500).send({ message: error });
   }

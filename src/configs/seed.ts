@@ -2,11 +2,12 @@ import {
   CATEGORY,
   COLOR,
   ROLE,
+  STATUS,
   TAG,
 } from "../constants";
 import type { Error } from "mongoose";
 import type { ITag } from '../types'
-import { CategoryModel, ColorModel, RoleModel, TagModel } from "../models";
+import { CategoryModel, ColorModel, RoleModel, StatusModel, TagModel } from "../models";
 
 function initTag() {
   TagModel.estimatedDocumentCount((err: Error | null, count: number) => {
@@ -77,9 +78,27 @@ function initColor() {
   console.log("-> seeding successfully for color collection");
 }
 
+function initStatus() {
+  StatusModel.estimatedDocumentCount((err: Error | null, count: number) => {
+    if (!err && count === 0) {
+      STATUS.forEach((status: string) => {
+        new StatusModel({
+          name: status,
+        }).save((err: Error | null) => {
+          if (err) {
+            console.log("error", err);
+          }
+        });
+      });
+    }
+  });
+  console.log("-> seeding successfully for status collection");
+}
+
 export default function initSampleSeed() {
   initRole();
   initColor();
   initTag();
   initCategory();
+  initStatus();
 }

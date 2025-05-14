@@ -2,12 +2,12 @@ import mongoose from "mongoose";
 import { ENTITY } from "../constants";
 
 const statusSchema: mongoose.Schema = new mongoose.Schema({
-  creatorIdId: {
+  creatorId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: ENTITY.USER,
-    required: true,
+    required: false,
   },
-  label: {
+  name: {
     type: String,
     required: true,
   },
@@ -15,6 +15,7 @@ const statusSchema: mongoose.Schema = new mongoose.Schema({
     type: String,
     default: "",
   },
+  __v: { type: Number, select: false },
 }).set("timestamps", true);
 
 type IStatusModel = mongoose.InferSchemaType<typeof statusSchema> & Document;

@@ -11,10 +11,12 @@ const tagSchema: mongoose.Schema = new mongoose.Schema({
     type: String,
     unique: true,
   },
-  color: {
-    type: String,
-    required: true,
+  colorId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: ENTITY.COLOR,
+    required: false,
   },
+  __v: { type: Number, select: false },
 });
 
 type ITagModel = mongoose.InferSchemaType<typeof tagSchema> & Document;

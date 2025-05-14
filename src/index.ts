@@ -2,6 +2,7 @@ import App from "./configs/app.config";
 
 import ColorsRouter from "./routes/admin/colors.router";
 import StatisticalRouter from "./routes/admin/statistical.router";
+import StatusRouter from "./routes/admin/status.router";
 import TagsRouter from "./routes/admin/tags.router";
 import UsersRouter from "./routes/admin/users.router";
 
@@ -26,6 +27,7 @@ const app = new App(
     new UsersRouter(),
     new TagsRouter(),
     new ColorsRouter(),
+    new StatusRouter(),
   ]
 );
 

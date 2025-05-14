@@ -1,15 +1,11 @@
 import type { Request, Response } from "express";
-import { UserModel, ProjectModel, BoardModel, CardModel } from "../../models";
+import { UserModel, ProjectModel, BoardModel, CardModel, TodoModel, NoteModel } from "../../models";
+import { E_ACCESS } from "../../enums";
 
 const createProject = async (req: any, res: Response): Promise<void> => {
   try {
     const project = new ProjectModel({ owner: req.user.id, ...req.body });
     const savedProject = await project.save();
-
-    await UserModel.updateMany(
-      { _id: req.user.id },
-      { $push: { projects: savedProject._id } }
-    );
 
     res.status(201).send(savedProject);
   } catch (error) {
@@ -21,7 +17,7 @@ const getAllProjects = async (req: any, res: Response): Promise<void> => {
   try {
     const access: string = req.query.access;
 
-    if (access === "all") {
+    if (access === E_ACCESS.ALL) {
       const total = await ProjectModel.countDocuments({
         owner: req.user.id,
       });
@@ -29,9 +25,10 @@ const getAllProjects = async (req: any, res: Response): Promise<void> => {
         {
           owner: req.user.id,
         },
-        "_id props members isFavorite name access categoryId createdAt",
+        "_id members isFavorite name access createdAt",
         { sort: { createdAt: -1 }, skip: 0, limit: req.query.limit }
-      );
+      ).populate("owner", "_id username");
+
       const lastUpdated = await ProjectModel.find(
         {
           owner: req.user.id,
@@ -47,14 +44,16 @@ const getAllProjects = async (req: any, res: Response): Promise<void> => {
       owner: req.user.id,
       access: access,
     });
+
     const projects = await ProjectModel.find(
       {
         owner: req.user.id,
         access: access,
       },
-      "_id props members isFavorite name access categoryId createdAt",
+      "_id members isFavorite name access createdAt",
       { sort: { createdAt: -1 }, skip: 0, limit: req.query.limit }
     );
+
     const lastUpdated = await ProjectModel.find(
       {
         owner: req.user.id,
@@ -94,20 +93,12 @@ const updateProject = async (req: Request, res: Response): Promise<void> => {
 
 const deleteProject = async (req: Request, res: Response): Promise<void> => {
   try {
-    const findBoards = await BoardModel.find({ projectId: req.params.id });
-    if (findBoards.length > 0) {
-      findBoards.forEach(async (Board) => {
-        await CardModel.deleteMany({ boardId: Board._id });
-      });
-      await BoardModel.deleteMany({ projectId: req.params.id });
-    }
+    await TodoModel.deleteMany({ projectId: req.params.id });
+    await NoteModel.deleteMany({ projectId: req.params.id });
+    await CardModel.deleteMany({ projectId: req.params.id });
 
     await ProjectModel.findByIdAndDelete(req.params.id);
 
-    await UserModel.updateMany(
-      { projects: req.params.id },
-      { $pull: { projects: req.params.id } }
-    );
     res.status(200).send("Project has been deleted!");
   } catch (error) {
     res.status(500).send({ message: error });

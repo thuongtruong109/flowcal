@@ -8,6 +8,7 @@ const categorySchema = new mongoose.Schema({
     unique: true,
     max: 10,
   },
+  __v: { type: Number, select: false },
 });
 
 type ICategoryModel = mongoose.InferSchemaType<typeof categorySchema> & Document;

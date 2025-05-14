@@ -23,21 +23,29 @@ const userSchema: mongoose.Schema = new mongoose.Schema(
     salt: String,
     roles: [
       {
-      type: String,
-      enum: ROLE,
-      required: true,
-      default: "user"
-    }],
+        type: mongoose.Schema.Types.ObjectId,
+        ref: ENTITY.ROLE,
+      },
+    ],
     isVerified: {
       type: Boolean,
       default: false,
+    },
+    isBlocked: {
+      type: Boolean,
+      default: false,
+    },
+    fullName: {
+      type: String,
+      default: "",
     },
     avatar: {
       type: String,
       default: "",
     },
+    __v: { type: Number, select: false },
   },
-  { toJSON: { virtuals: true } }
+  { toJSON: { virtuals: true }}
   // { timestamps: true }
 ).set("timestamps", true);
 

@@ -34,6 +34,7 @@ const boardSchema: mongoose.Schema = new mongoose.Schema({
       ref: ENTITY.CARD,
     },
   ],
+  __v: { type: Number, select: false },
 }).set("timestamps", true);
 
 // boardSchema.index({ projectId: 1, name: 1 }, { unique: true });

@@ -20,6 +20,20 @@ export const ROLE: Array<string> = ["admin", "user"];
 
 export const CATEGORY: Array<string> = ["kanban", "todo", "note"];
 
+export const STATUS: Array<string> = [
+    "todo",
+    "doing",
+    "done",
+    "cancelled",
+    "archived",
+    "in-progress",
+    "completed",
+    "pending",
+    "rejected",
+    "failed",
+    "success",
+]
+
 export const TAG: Array<ITag> = [
     {
         name: "family",
@@ -60,3 +74,5 @@ export const COLOR: Array<string> = [
     "#CFF4D2",
     "#F5CEC7",
 ];
+
+export const REFRESH_TOKEN = "refreshToken";

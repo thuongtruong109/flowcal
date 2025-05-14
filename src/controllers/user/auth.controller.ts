@@ -7,6 +7,7 @@ import type { IRoleDto, IUser } from "../../types";
 import { comparePassword, hashPassword } from "../../helpers/hash";
 import { envConf } from "../../configs/env.config";
 import { UserModel, RoleModel } from "../../models";
+import { REFRESH_TOKEN } from "../../constants";
 
 const signup = async (req: Request, res: Response) => {
   const key = await hashPassword(req.body.password);
@@ -145,7 +146,7 @@ const signin = (req: Request, res: Response) => {
   UserModel.findOne({
     username: req.body.username,
   })
-    .populate("roles", "-__v")
+    .populate("roles")
     .exec((err: Error | null, user: IUser | any) => {
       if (err) {
         res.status(500).send({ message: err });
@@ -172,7 +173,7 @@ const signin = (req: Request, res: Response) => {
       const refreshToken = generateRefreshToken(user);
       refreshTokens.push(refreshToken);
 
-      res.cookie("refreshToken", refreshToken, {
+      res.cookie(REFRESH_TOKEN, refreshToken, {
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24 * 365,
         sameSite: "strict",
@@ -211,7 +212,7 @@ const refreshToken = (req: Request, res: Response) => {
     const newAccessToken = generateAccessToken(user);
     const newRefreshToken = generateRefreshToken(user);
     refreshTokens.push(newRefreshToken);
-    res.cookie("refreshToken", newRefreshToken, {
+    res.cookie(REFRESH_TOKEN, newRefreshToken, {
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24 * 365,
       sameSite: "strict",
@@ -227,7 +228,7 @@ const logout = (req: Request, res: Response) => {
   refreshTokens = refreshTokens.filter(
     (token) => token !== req.cookies.refreshToken
   );
-  res.clearCookie("refreshToken");
+  res.clearCookie(REFRESH_TOKEN);
   res.status(200).send({ message: "Logged out!" });
 };
 

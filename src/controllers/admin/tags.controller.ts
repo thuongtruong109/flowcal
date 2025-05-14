@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { BoardModel, TagModel } from "../../models";
+import { BoardModel, CardModel, NoteModel, TagModel } from "../../models";
 
 const createTag = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -35,9 +35,13 @@ const updateTag = async (req: Request, res: Response) => {
 
 const deleteTag = async (req: Request, res: Response): Promise<void> => {
   try {
-    await BoardModel.updateMany(
-      { cards: { tags: req.params.id } },
-      { $set: { cards: { tags: null } } }
+    await NoteModel.updateMany(
+      { tagId: req.params.id },
+      { $set: { tagId: null } }
+    );
+    await CardModel.updateMany(
+      { tagId: req.params.id },
+      { $set: { tagId: null } }
     );
     await TagModel.findByIdAndDelete(req.params.id);
     res.status(200).send({ message: "Tag deleted" });

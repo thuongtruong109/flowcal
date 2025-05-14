@@ -32,20 +32,13 @@ const projectSchema = new mongoose.Schema({
   },
   background: {
     type: String,
-    default: "#ffffff",
+    default: "",
   },
   customBackground: {
     type: String,
     default: "",
   },
-  startDate: {
-    type: Date,
-    default: Date.now(),
-  },
-  endDate: {
-    type: Date,
-    default: Date.now(),
-  },
+  __v: { type: Number, select: false },
 }).set("timestamps", true);
 
 type IProjectModel = mongoose.InferSchemaType<typeof projectSchema> & Document;

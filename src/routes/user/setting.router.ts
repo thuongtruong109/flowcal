@@ -1,6 +1,6 @@
 import { Router } from "express";
 import type { IRouter } from "../../types";
-import settingController from "../../controllers/user/setting.controller";
+import settingController from "../../controllers/user/setting/color.controller";
 import verifyAuth from "../../middlewares/authen.middleware";
 import { uploadAvatar, uploadEventImg } from "../../decorators/file";
 

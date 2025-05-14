@@ -7,8 +7,9 @@ const todoSchema: mongoose.Schema = new mongoose.Schema({
     ref: ENTITY.PROJECT,
     required: true,
   },
-  status: {
-    type: String,
+  statusId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: ENTITY.STATUS,
     required: true,
   },
   icon: {
@@ -19,6 +20,7 @@ const todoSchema: mongoose.Schema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  __v: { type: Number, select: false },
 }).set("timestamps", true);
 
 type ITodoModel = mongoose.InferSchemaType<typeof todoSchema> & Document;
