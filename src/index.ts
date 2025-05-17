@@ -1,34 +1,42 @@
 import App from "./configs/app.config";
 
-import ColorsRouter from "./routes/admin/colors.router";
-import StatisticalRouter from "./routes/admin/statistical.router";
-import StatusRouter from "./routes/admin/status.router";
-import TagsRouter from "./routes/admin/tags.router";
-import UsersRouter from "./routes/admin/users.router";
+import AdminColorsRouter from "./modules/admin/color/route.colors";
+import AdminStatsRouter from "./modules/admin/stat/route.stats";
+import AdminTagsRouter from "./modules/admin/tag/route.tag";
+import AdminStatusRouter from "./modules/admin/status/route.status";
+import AdminUsersRouter from "./modules/admin/user/route.user";
 
-import AuthRouter from "./routes/user/auth.router";
-import BoardRouter from "./routes/user/board.router";
-import CardRouter from "./routes/user/card.router";
-import EventRouter from "./routes/user/event.router";
-import ProjectRouter from "./routes/user/project.router";
-import SettingRouter from "./routes/user/setting.router";
+import AuthRouter from "./modules/user/auth/auth.route";
+import KanbanRouter from "./modules/user/kanban/kanban.route";
+import EventRouter from "./modules/user/event/route.event";
+import CardRouter from "./modules/user/card/card.route";
+import ProjectRouter from "./modules/user/project/project.route";
+import ResourceRouter from "./modules/user/resource/route.resource";
+import TagsRouter from "./modules/user/tag/route.tag";
+import StatusRouter from "./modules/user/status/route.status";
+import ProfileRouter from "./modules/user/profile/route.profile";
+import NoteRouter from "./modules/user/note/note.route";
 
 const app = new App(
   [
-    new AuthRouter(),
-    new SettingRouter(),
-    new ProjectRouter(),
-    new BoardRouter(),
-    new CardRouter(),
-    new EventRouter(),
+    new AdminStatsRouter(),
+    new AdminUsersRouter(),
+    new AdminTagsRouter(),
+    new AdminColorsRouter(),
+    new AdminStatusRouter(),
   ],
   [
-    new StatisticalRouter(),
-    new UsersRouter(),
-    new TagsRouter(),
-    new ColorsRouter(),
+    new AuthRouter(),
+    new ResourceRouter(),
+    new ProjectRouter(),
+    new KanbanRouter(),
+    new CardRouter(),
+    new EventRouter(),
     new StatusRouter(),
-  ]
+    new TagsRouter(),
+    new ProfileRouter(),
+    new NoteRouter(),
+  ],
 );
 
 app.listen();

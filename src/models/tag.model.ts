@@ -11,10 +11,9 @@ const tagSchema: mongoose.Schema = new mongoose.Schema({
     type: String,
     unique: true,
   },
-  colorId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: ENTITY.COLOR,
-    required: false,
+  color: {
+    type: String,
+    required: true,
   },
   __v: { type: Number, select: false },
 });

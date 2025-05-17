@@ -40,9 +40,8 @@ const eventSchema: mongoose.Schema = new mongoose.Schema({
       default: [],
     },
   ],
-  colorId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: ENTITY.COLOR,
+  color: {
+    type: String,
     required: true,
   },
   __v: { type: Number, select: false },

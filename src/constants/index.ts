@@ -3,17 +3,17 @@ import type { ITag } from '../types'
 export const ENTITY = {
     ROLE: "Role",
     USER: "User",
+    EVENT: "Event",
     PROJECT: "Project",
     CATEGORY: "Category",
-    EVENT: "Event",
-    TAG: "Tag",
-    COLOR: "Color",
+    BOARD: "Board",
     CARD: "Card",
-    TODO: "Todo",
-    NOTE: "Note",
+    TAG: "Tag",
     STATUS: "Status",
 
-    BOARD: "Board",
+    COLOR: "Color",
+    // TODO: "Todo",
+    // NOTE: "Note",
 };
 
 export const ROLE: Array<string> = ["admin", "user"];

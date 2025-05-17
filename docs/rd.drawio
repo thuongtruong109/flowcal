@@ -1,9 +1,51 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36 Edg/136.0.0.0" version="27.0.4">
-  <diagram name="Page-1" id="C18q4Q7k-_u1Crv5Ksd3">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36 Edg/136.0.0.0" version="27.0.5">
+  <diagram name="Page-1" id="kZW_y3eSp8JFubKHm18p">
     <mxGraphModel dx="1418" dy="786" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="s17WVeK0sm8f9s1YqTKB-2" value="&lt;b&gt;Card&lt;/b&gt;" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=8;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="480" y="440" width="60" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="s17WVeK0sm8f9s1YqTKB-3" value="projectId&lt;div&gt;statusId&lt;/div&gt;&lt;div&gt;text&lt;/div&gt;&lt;div&gt;tagId&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;whiteSpace=wrap;" parent="s17WVeK0sm8f9s1YqTKB-2" vertex="1">
+          <mxGeometry y="30" width="60" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="d_3km4u12PkidFHn_pgw-1" value="&lt;b&gt;User&lt;/b&gt;" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=8;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="160" width="70" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="d_3km4u12PkidFHn_pgw-2" value="username&lt;div&gt;email&lt;/div&gt;&lt;div&gt;password&lt;/div&gt;&lt;div&gt;salt&lt;/div&gt;&lt;div&gt;roles&lt;/div&gt;&lt;div&gt;isVerified&lt;/div&gt;&lt;div&gt;avatar&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;whiteSpace=wrap;" vertex="1" parent="d_3km4u12PkidFHn_pgw-1">
+          <mxGeometry y="30" width="70" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="d_3km4u12PkidFHn_pgw-3" value="&lt;b&gt;Project&lt;/b&gt;" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=8;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="360" width="75" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="d_3km4u12PkidFHn_pgw-4" value="owner&lt;div&gt;name&lt;/div&gt;&lt;div&gt;isFavorite&lt;/div&gt;&lt;div&gt;description&lt;/div&gt;&lt;div&gt;color&lt;/div&gt;&lt;div&gt;background&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;whiteSpace=wrap;" vertex="1" parent="d_3km4u12PkidFHn_pgw-3">
+          <mxGeometry y="30" width="75" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="d_3km4u12PkidFHn_pgw-5" value="&lt;b&gt;Status&lt;/b&gt;" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=8;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="300" width="60" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="d_3km4u12PkidFHn_pgw-6" value="creatorId&lt;div&gt;name&lt;/div&gt;&lt;div&gt;boardId&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;whiteSpace=wrap;" vertex="1" parent="d_3km4u12PkidFHn_pgw-5">
+          <mxGeometry y="30" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="d_3km4u12PkidFHn_pgw-10" value="&lt;b&gt;Tag&lt;/b&gt;" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=8;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="160" width="60" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="d_3km4u12PkidFHn_pgw-11" value="creatorId&lt;div&gt;name&lt;/div&gt;&lt;div&gt;color&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;whiteSpace=wrap;" vertex="1" parent="d_3km4u12PkidFHn_pgw-10">
+          <mxGeometry y="30" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="d_3km4u12PkidFHn_pgw-12" value="&lt;b&gt;Event&lt;/b&gt;" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=8;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="220" y="160" width="90" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="d_3km4u12PkidFHn_pgw-13" value="organizer&lt;div&gt;title&lt;/div&gt;&lt;div&gt;description&lt;/div&gt;&lt;div&gt;time: {&lt;/div&gt;&lt;div&gt;start,&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;end,&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;date&lt;/span&gt;&lt;/div&gt;&lt;div&gt;}&lt;/div&gt;&lt;div&gt;location&lt;/div&gt;&lt;div&gt;attendees&lt;/div&gt;&lt;div&gt;color&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;whiteSpace=wrap;" vertex="1" parent="d_3km4u12PkidFHn_pgw-12">
+          <mxGeometry y="30" width="90" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="d_3km4u12PkidFHn_pgw-15" value="&lt;b&gt;Board&lt;/b&gt;" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=8;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="390" width="70" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="d_3km4u12PkidFHn_pgw-16" value="projectId&lt;div&gt;category&lt;/div&gt;&lt;div&gt;name&lt;/div&gt;&lt;div&gt;description&lt;/div&gt;&lt;div&gt;isFavorite&lt;/div&gt;&lt;div&gt;color&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;whiteSpace=wrap;" vertex="1" parent="d_3km4u12PkidFHn_pgw-15">
+          <mxGeometry y="30" width="70" height="100" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>

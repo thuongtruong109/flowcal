@@ -1,6 +1,6 @@
 import type { Response, NextFunction } from "express";
 import type { Error } from "mongoose";
-import type { IDecoded, IRole, IUser } from "../types";
+import type { IDecoded, IRequest, IRole, IUser } from "../types";
 import jwt from "jsonwebtoken";
 import { UserModel, RoleModel } from "../models";
 import { envConf } from "../configs/env.config";
@@ -36,7 +36,7 @@ const verifyToken = (req: any, res: Response, next: NextFunction) => {
   }
 };
 
-const isAdmin = (req: any, res: Response, next: NextFunction) => {
+const isAdmin = (req: IRequest, res: Response, next: NextFunction) => {
   UserModel.findById(req.userId).exec((err: Error | null, user: IUser | any) => {
     if (err) {
       res.status(500).send({ message: err });

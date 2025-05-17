@@ -11,10 +11,6 @@ const statusSchema: mongoose.Schema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  icon: {
-    type: String,
-    default: "",
-  },
   __v: { type: Number, select: false },
 }).set("timestamps", true);
 

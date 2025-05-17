@@ -5,9 +5,7 @@ export const envConf = {
   nodeEnv: process.env.NODE_ENV || "development",
   port: process.env.APP_PORT ? Number.parseInt(process.env.APP_PORT) : 3000,
   appUrl: process.env.APP_URL || "http://localhost:3000",
-  corsOrigin: process.env.CORS_ORIGIN
-    ? process.env.CORS_ORIGIN.split(",")
-    : "*",
+  corsOrigin: process.env.CORS_ORIGIN || "*",
   rateLimitMaxReq: process.env.RATE_LIMIT_MAX_REQUESTS
     ? Number.parseInt(process.env.RATE_LIMIT_MAX_REQUESTS)
     : 1000,

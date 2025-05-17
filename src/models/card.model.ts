@@ -2,19 +2,15 @@ import mongoose from "mongoose";
 import { ENTITY } from "../constants";
 
 const cardSchema: mongoose.Schema = new mongoose.Schema({
-  projectId: {
+  boardId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: ENTITY.PROJECT,
+    ref: ENTITY.BOARD,
     required: true,
   },
   statusId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: ENTITY.STATUS,
     required: true,
-  },
-  icon: {
-    type: String,
-    default: "",
   },
   text: {
     type: String,
