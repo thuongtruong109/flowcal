@@ -1,19 +1,7 @@
 import mongoose from "mongoose";
-import { ENTITY } from "../constants";
+import { ENTITY, ROLE } from "../constants";
 
-interface IUserModel extends mongoose.Document {
-  username: string;
-  email: string;
-  password: string;
-  isVerify: boolean;
-  avatar: string;
-  salt: string;
-  roles: string[];
-  projects: string[];
-  events: string[];
-}
-
-const UserSchema: mongoose.Schema = new mongoose.Schema(
+const userSchema: mongoose.Schema = new mongoose.Schema(
   {
     username: {
       type: String,
@@ -26,17 +14,12 @@ const UserSchema: mongoose.Schema = new mongoose.Schema(
       max: 50,
       unique: true,
     },
-    isVerified: {
-      type: Boolean,
-      default: false,
-    },
     password: {
       type: String,
       required: true,
       max: 21,
       min: 8,
     },
-    avatar: String,
     salt: String,
     roles: [
       {
@@ -44,26 +27,34 @@ const UserSchema: mongoose.Schema = new mongoose.Schema(
         ref: ENTITY.ROLE,
       },
     ],
-    projects: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: ENTITY.PROJECT,
-      },
-    ],
-    events: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: ENTITY.EVENT,
-      },
-    ],
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
+    isBlocked: {
+      type: Boolean,
+      default: false,
+    },
+    fullName: {
+      type: String,
+      default: "",
+    },
+    avatar: {
+      type: String,
+      default: "",
+    },
+    __v: { type: Number, select: false },
   },
-  { toJSON: { virtuals: true } }
+  { toJSON: { virtuals: true }}
   // { timestamps: true }
 ).set("timestamps", true);
 
-UserSchema.set("toObject", { virtuals: true });
-UserSchema.set("toJSON", { virtuals: true });
+userSchema.set("toObject", { virtuals: true });
+userSchema.set("toJSON", { virtuals: true });
 
-const UserModel = mongoose.model<IUserModel>(ENTITY.USER, UserSchema);
+// userSchema.index({ username: 1 }, { unique: true });
+
+type IUserModel = mongoose.InferSchemaType<typeof userSchema> & Document;
+const UserModel = mongoose.model<IUserModel>(ENTITY.USER, userSchema);
 
 export default UserModel;

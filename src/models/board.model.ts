@@ -1,20 +1,15 @@
 import mongoose from "mongoose";
-import { ENTITY } from "../constants";
-
-interface IBoardModel extends mongoose.Document {
-  projectId: mongoose.Schema.Types.ObjectId;
-  name: string;
-  description: string;
-  isFavorite: boolean;
-  background: mongoose.Schema.Types.ObjectId;
-  customBackground: string;
-  cards: mongoose.Schema.Types.ObjectId[];
-}
+import { CATEGORY, ENTITY } from "../constants";
 
 const boardSchema: mongoose.Schema = new mongoose.Schema({
   projectId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: ENTITY.PROJECT,
+    required: true,
+  },
+  category: {
+    type: String,
+    enum: CATEGORY,
     required: true,
   },
   name: {
@@ -30,22 +25,21 @@ const boardSchema: mongoose.Schema = new mongoose.Schema({
     default: false,
   },
   background: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: ENTITY.COLOR,
-    required: true,
+    type: String,
+    default: "",
   },
   customBackground: {
     type: String,
     default: "",
   },
-  cards: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: ENTITY.CARD,
-    },
-  ],
+  __v: { type: Number, select: false },
 }).set("timestamps", true);
 
+// boardSchema.index({ projectId: 1, name: 1 }, { unique: true });
+// boardSchema.index({ projectId: 1, isFavorite: 1 }, { unique: true });
+// boardSchema.index({ projectId: 1, cards: 1 }, { unique: true });
+
+type IBoardModel = mongoose.InferSchemaType<typeof boardSchema> & Document;
 const BoardModel = mongoose.model<IBoardModel>(ENTITY.BOARD, boardSchema);
 
 export default BoardModel;

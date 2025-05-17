@@ -4,7 +4,7 @@ import { envConf } from "./env.config";
 import ErrorHandler from "../middlewares/error.middleware";
 import { rateLimiterMiddleware } from "../middlewares/rate.middleware";
 import type { IRouter } from "../types";
-import { capitializeString } from "../utils";
+import { capitializeString } from "../helpers";
 import compression from "compression";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -23,11 +23,11 @@ class App {
   public logger: Logger;
   private _signal = {} as Server;
 
-  constructor(userRoutes: IRouter[], adminRoutes: IRouter[]) {
+  constructor(adminRoutes: IRouter[], serRoutes: IRouter[]) {
     this.app = express();
     this.logger = pino({ name: "Logger" });
     this._initMiddlewares();
-    this._initRoutes(userRoutes, adminRoutes);
+    this._initRoutes(adminRoutes, serRoutes);
     this._initSwagger();
     ConnectDB();
   }
@@ -87,12 +87,12 @@ class App {
     this.app.use(ErrorHandler);
   }
 
-  private _initRoutes(userRoutes: IRouter[], adminRoutes: IRouter[]) {
-    userRoutes.forEach((route: IRouter) => {
-      this.app.use("/api", route.router);
-    });
+  private _initRoutes(adminRoutes: IRouter[], userRoutes: IRouter[]) {
     adminRoutes.forEach((route: IRouter) => {
       this.app.use("/api/admin", route.router);
+    });
+    userRoutes.forEach((route: IRouter) => {
+      this.app.use("/api", route.router);
     });
   }
 

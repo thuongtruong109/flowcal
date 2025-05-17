@@ -2,17 +2,20 @@ import {
   CATEGORY,
   COLOR,
   ROLE,
+  STATUS,
   TAG,
 } from "../constants";
-import db from "../models";
 import type { Error } from "mongoose";
+import type { ITag } from '../types'
+import { CategoryModel, ColorModel, RoleModel, StatusModel, TagModel } from "../models";
 
 function initTag() {
-  db.tag.estimatedDocumentCount((err: Error | null, count: number) => {
+  TagModel.estimatedDocumentCount((err: Error | null, count: number) => {
     if (!err && count === 0) {
-      TAG.forEach((tag: string) => {
-        new db.tag({
-          name: tag,
+      TAG.forEach((tag: ITag) => {
+        new TagModel({
+          name: tag.name,
+          color: tag.color
         }).save((err: Error | null) => {
           if (err) {
             console.log("error", err);
@@ -25,10 +28,10 @@ function initTag() {
 }
 
 function initRole() {
-  db.role.estimatedDocumentCount((err: Error | null, count: number) => {
+  RoleModel.estimatedDocumentCount((err: Error | null, count: number) => {
     if (!err && count === 0) {
       ROLE.forEach((role: string) => {
-        new db.role({
+        new RoleModel({
           name: role,
         }).save((err: Error | null) => {
           if (err) {
@@ -42,10 +45,10 @@ function initRole() {
 }
 
 function initCategory() {
-  db.category.estimatedDocumentCount((err: Error | null, count: number) => {
+  CategoryModel.estimatedDocumentCount((err: Error | null, count: number) => {
     if (!err && count === 0) {
       CATEGORY.forEach((category: string) => {
-        new db.category({
+        new CategoryModel({
           name: category,
         }).save((err: Error | null) => {
           if (err) {
@@ -59,10 +62,10 @@ function initCategory() {
 }
 
 function initColor() {
-  db.color.estimatedDocumentCount((err: Error | null, count: number) => {
+  ColorModel.estimatedDocumentCount((err: Error | null, count: number) => {
     if (!err && count === 0) {
       COLOR.forEach((color: string) => {
-        new db.color({
+        new ColorModel({
           name: `${color}`,
         }).save((err: Error | null) => {
           if (err) {
@@ -75,9 +78,27 @@ function initColor() {
   console.log("-> seeding successfully for color collection");
 }
 
+function initStatus() {
+  StatusModel.estimatedDocumentCount((err: Error | null, count: number) => {
+    if (!err && count === 0) {
+      STATUS.forEach((status: string) => {
+        new StatusModel({
+          name: status,
+        }).save((err: Error | null) => {
+          if (err) {
+            console.log("error", err);
+          }
+        });
+      });
+    }
+  });
+  console.log("-> seeding successfully for status collection");
+}
+
 export default function initSampleSeed() {
-  initColor();
   initRole();
+  initColor();
   initTag();
   initCategory();
+  initStatus();
 }
