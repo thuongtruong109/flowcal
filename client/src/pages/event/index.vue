@@ -18,7 +18,7 @@ import DatePicker from "@/components/calendar/DatePicker.vue";
 import Tooltip from "@/components/calendar/Tooltip.vue";
 import { IEvent } from "@/types";
 import CreateEvent from "@/components/calendar/CreateEvent.vue";
-import EventService from "@/services/event.service";
+import EventService from "@/services/event";
 import ScreenShot from "@/components/calendar/ScreenShot.vue";
 
 const screenShot = ref<any>(null);

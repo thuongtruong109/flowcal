@@ -4,7 +4,7 @@ import { useRouter } from "vue-router";
 import { Icon } from "@iconify/vue";
 import Modal from "@/components/Modal.vue";
 import { Switch } from "@headlessui/vue";
-import ProjectService from "@/services/project.service";
+import ProjectService from "@/services/project";
 
 const router = useRouter();
 
@@ -70,11 +70,10 @@ const handleCreateProject = async () => {
       <button
         type="button"
         @click="openModal"
-        class="flex items-center text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br hover:ring-2 focus:outline-none hover:ring-purple-300 dark:hover:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-lg text-sm p-2 pr-3"
+        class="w-full h-full flex items-center dark:text-white font-medium rounded-lg text-sm border-2 border-dashed bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 p-2 justify-center group cursor-pointer group"
       >
-        <Icon icon="material-symbols:add" width="20" class="w-6" /><span
-          >New</span
-        >
+        <Icon icon="material-symbols:add" width="20" class="w-6 group-hover:rotate-90 duration-200" />
+        <span>New</span>
       </button>
     </template>
     <template #title>

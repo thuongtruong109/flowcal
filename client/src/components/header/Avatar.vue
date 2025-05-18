@@ -10,10 +10,10 @@ const authStore = useAuthStore();
     class="flex items-center space-x-4 font-medium dark:text-white cursor-pointer"
   >
     <img
-      class="w-10 h-10 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 p-0.5"
+      class="w-9 h-9 rounded-full"
       src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
       alt="avatar_img"
     />
-    <p>{{ authStore.getUser.username }}</p>
+    <!-- <p>{{ authStore.getUser.username }}</p> -->
   </router-link>
 </template>

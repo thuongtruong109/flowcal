@@ -3,7 +3,7 @@ import { ref, reactive, computed, watchEffect } from "vue";
 import { useRouter } from "vue-router";
 import { Switch } from "@headlessui/vue";
 import { Icon } from "@iconify/vue";
-import EventService from "@/services/event.service";
+import EventService from "@/services/event";
 import Modal from "@/components/Modal.vue";
 import HourSelect from "./HourSelect.vue";
 import ColorSet from "@/components/ColorSet.vue";

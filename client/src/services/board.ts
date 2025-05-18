@@ -3,31 +3,31 @@ import axiosConfig from "./axios";
 const BOARD = "/board";
 
 class BoardService {
-  createBoard = async (board: any) => {
+  async createBoard(board: any) {
     return await axiosConfig.post(`${BOARD}`, board);
   };
 
-  getAllBoards = async (projectId: string) => {
+  async getAllBoards(projectId: string){
     return await axiosConfig.get(`/project/${projectId}${BOARD}/all`);
   };
 
-  getListBoardsName = async (projectId: string) => {
+  async getListBoardsName(projectId: string) {
     return await axiosConfig.get(`/project/${projectId}${BOARD}/name`);
   };
 
-  getBoardById = async (id: string) => {
+  async getBoardById(id: string) {
     return await axiosConfig.get(`${BOARD}/${id}`);
   };
 
-  getInfoBoard = async (boardId: string) => {
+  async getInfoBoard(boardId: string) {
     return await axiosConfig.get(`${BOARD}/${boardId}/info`);
   };
 
-  updateBoard = async (id: string, board: any) => {
+  async updateBoard(id: string, board: any) {
     return await axiosConfig.put(`${BOARD}/${id}`, board);
   };
 
-  deleteBoard = async (id: string) => {
+  async deleteBoard(id: string) {
     return await axiosConfig.delete(`${BOARD}/${id}`);
   };
 }

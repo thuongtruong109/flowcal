@@ -35,10 +35,10 @@ body {
     user-select: none;
 }
 
-a {
+/* a {
     color: var(--color-primary);
     text-decoration: none;
-}
+} */
 
 button,
 input,

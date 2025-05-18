@@ -2,7 +2,7 @@
 import { ref, reactive, computed, watch, onMounted } from "vue";
 import { Icon } from "@iconify/vue";
 import Modal from "@/components/Modal.vue";
-import CardService from "@/services/card.service";
+import CardService from "@/services/card";
 import useCardStore from "@/store/card";
 import useTagStore from "@/store/tag";
 import Tag from "@/components/project/board/Tag.vue";

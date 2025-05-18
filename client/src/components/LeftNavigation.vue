@@ -8,7 +8,7 @@ const matchRoute = (query: string): boolean =>
 
 const toggles: Array<INav> = [
   {
-    path: "/projects" || "/project/:projectId",
+    path: "/projects",
     width: 42,
     title: "projects",
     img: "/img/project.png",

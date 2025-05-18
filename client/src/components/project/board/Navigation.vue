@@ -5,7 +5,7 @@ import { Icon } from "@iconify/vue";
 import BackgroundMenu from "./BackgroundMenu.vue";
 import BoardMenu from "./BoardMenu.vue";
 import ViewInfo from "./ViewInfo.vue";
-import BoardService from "@/services/board.service";
+import BoardService from "@/services/board";
 
 const router = useRouter();
 const boardId = router.currentRoute.value.params.boardId as string;

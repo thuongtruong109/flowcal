@@ -47,7 +47,7 @@ onMounted(() => {
   <button
     id="theme-toggle"
     type="button"
-    class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 outline-none hover:ring-2 ring-gray-200 dark:ring-gray-700 rounded-lg text-sm p-2"
+    class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 outline-none hover:ring ring-gray-200 dark:ring-gray-700 rounded-full text-sm p-1"
   >
     <Moon />
     <Sun />

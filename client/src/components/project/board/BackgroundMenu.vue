@@ -12,7 +12,7 @@ import {
 } from "@headlessui/vue";
 import { Icon } from "@iconify/vue";
 import ColorSet from "@/components/ColorSet.vue";
-import BoardService from "@/services/board.service";
+import BoardService from "@/services/board";
 import { customBackgrounds } from "@/shared/background";
 
 const router = useRouter();

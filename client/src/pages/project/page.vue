@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { reactive, onMounted, watchEffect } from "vue";
 import OverView from "@/components/project/OverView.vue";
-import ModeView from "@/components/project/ModeView.vue";
-import ProjectBox from "@/components/project/ProjectBox.vue";
+import ProjectCard from "@/pages/project/_components/ProjectCard.vue";
 import { projectBoxColors } from "@/shared/color";
-import Sort from "@/components/Sort.vue";
+import Sort from "@/pages/project/_components/Sort.vue";
 import ProjectService from "@/services/project";
 import useAuthStore from "@/store/auth";
 import { getIndex } from "@/utils/array";
 import { getCurrentDate } from "@/helpers/date";
-
-const authStore = useAuthStore();
+import { Icon } from "@iconify/vue";
+import SearchBox from "@/pages/project/_components/SearchBox.vue";
+import CreateProjectBtn from "@/pages/project/_components/CreateProjectBtn.vue";
 
 const payload = reactive({
   access: "all",
@@ -46,31 +46,32 @@ watchEffect(() => {
 
 <template>
   <section
-    class="text-gray-600 ml-5 p-5 bg-white dark:bg-gray-700 rounded-2xl w-full"
+    class="text-gray-600 p-4 bg-white dark:bg-gray-800 rounded-xl w-full h-full"
   >
-    <div class="flex justify-between">
-      <h1 class="text-2xl font-semibold">Overview</h1>
+    <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 pb-2 mb-4">
+      <SearchBox />
+      <div class="flex items-center gap-2">
+        <Sort />
+        <button class="hover:bg-gray-100 dark:hover:bg-gray-600 rounded-full p-2">
+          <Icon icon="proicons:info" width="20" height="20" />
+        </button>
+      </div>
+    </div>
+    <!-- <div class="flex justify-between">
       <h5 class="text-sm font-medium italic">
         Last updated: {{ getCurrentDate(payget.lastUpdated).year }}
         {{ getCurrentDate(payget.lastUpdated).monthName }},
         {{ getCurrentDate(payget.lastUpdated).day }}
       </h5>
-    </div>
-    <div class="flex justify-between items-center">
-      <OverView :total="payget.total" />
-      <div class="flex gap-10 items-end">
-        <Sort />
-        <ModeView />
-      </div>
-    </div>
-    <div class="grid grid-cols-4 gap-3">
-      <ProjectBox
+    </div> -->
+    <!-- <OverView :total="payget.total" /> -->
+    <div class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
+      <CreateProjectBtn />
+      <ProjectCard
         v-for="(project, i) in payget.projects"
         :key="project._id"
         :bgColor="`${projectBoxColors[getIndex(projectBoxColors, i)].bg}`"
-        :progressColor="`${
-          projectBoxColors[getIndex(projectBoxColors, i)].progress
-        }`"
+        :textColor="`${projectBoxColors[getIndex(projectBoxColors, i)].progress}`"
         :project="project"
         @favorited="getAllProjects"
       />

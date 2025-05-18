@@ -17,7 +17,6 @@ import { kanbanTypes } from "@/shared/kanban";
 import UpdateCard from "@/components/project/board/card/UpdateCard.vue";
 import useCardStore from "@/store/card";
 import CardService from "@/services/card";
-import { on } from "events";
 
 const router = useRouter();
 const tagStore = useTagStore();
@@ -178,18 +177,18 @@ const onCardDrop = async (dropResult: any, columnId: number) => {
             "
             :get-child-payload="getCardPayload(column._id)"
             :drop-placeholder="{
-              className: `bg-primary bg-opacity-20  
-            border-dotted border-2 
+              className: `bg-primary bg-opacity-20
+            border-dotted border-2
             border-primary rounded-lg mx-4 my-2`,
               animationDuration: '200',
               showOnTop: true,
             }"
-            drag-class="bg-primary dark:bg-primary 
-            border-2 border-primary-hover text-white 
+            drag-class="bg-primary dark:bg-primary
+            border-2 border-primary-hover text-white
             transition duration-100 ease-in z-50
             transform rotate-6 scale-110"
-            drop-class="transition duration-100 
-            ease-in z-50 transform 
+            drop-class="transition duration-100
+            ease-in z-50 transform
             -rotate-2 scale-90"
             @drop="(e: any) => onCardDrop(e, column._id)"
           >

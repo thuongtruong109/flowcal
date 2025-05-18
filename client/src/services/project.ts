@@ -1,6 +1,6 @@
 import axiosConfig from "./axios";
 
-const PROJECT = "/project";
+const PROJECT = "/projects";
 
 class ProjectService {
   async getProjects(

@@ -4,7 +4,7 @@ const SETTING = "/setting";
 
 class SettingService {
   getColorSet = async (): Promise<any> => {
-    return await axiosConfig.get(`${SETTING}/colors`);
+    return await axiosConfig.get('/color');
   };
 
   getTagSet = async () => {

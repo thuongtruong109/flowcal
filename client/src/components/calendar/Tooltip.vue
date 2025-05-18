@@ -3,7 +3,7 @@ import { ref, reactive, computed } from "vue";
 import { Menu, MenuButton, MenuItem } from "@headlessui/vue";
 import { Icon } from "@iconify/vue";
 import { getCurrentDate, getDateFormat, getISOFormat } from "@/helpers/date";
-import EventService from "@/services/event.service";
+import EventService from "@/services/event";
 import AvatarTag from "@/components/calendar/AvatarTag.vue";
 import HourSelect from "./HourSelect.vue";
 import TagInput from "../TagInput.vue";
