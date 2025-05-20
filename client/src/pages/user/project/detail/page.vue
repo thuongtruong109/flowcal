@@ -4,6 +4,7 @@ import { useRouter } from "vue-router";
 import BoardService from "@/services/board";
 import CreateBoard from "@/components/project/board/CreateBoard.vue";
 import CreateTable from "@/components/project/table/CreateTable.vue";
+import TabNavigator from "@/pages/user/project/detail/_components/TabNavigator.vue";
 
 const router = useRouter();
 
@@ -28,13 +29,14 @@ const isOpenInside = computed(() => {
 });
 
 const goToBoard = (boardId: string) => {
-  const path = `/project/${projectId}/board/${boardId}`;
+  const path = `/projects/${projectId}/board/${boardId}`;
   return path;
 };
 </script>
 
 <template>
-  <section class="bg-white dark:bg-gray-700 rounded-2xl w-full">
+  <section class="bg-white dark:bg-gray-700 rounded-2xl w-full p-4">
+    <TabNavigator />
     <div class="grid grid-cols-2 gap-10" v-if="!isOpenInside">
       <div class="bg-green-50 rounded-xl flex flex-col items-center p-5">
         <div class="flex justify-around mb-10">

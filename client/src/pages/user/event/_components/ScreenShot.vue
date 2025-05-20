@@ -7,7 +7,7 @@ import html2canvas from "html2canvas";
 import EventService from "@/services/event";
 import Modal from "@/components/Modal.vue";
 import HourSelect from "./HourSelect.vue";
-import ColorSet from "./ColorSet.vue";
+import ColorSet from "@components/ColorSet.vue";
 import TagInput from "@/components/TagInput.vue";
 import { getCurrentDate, getDateFormat } from "@/helpers/date";
 import { saveFile } from "@/helpers/file";

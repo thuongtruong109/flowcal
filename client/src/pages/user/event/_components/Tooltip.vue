@@ -4,10 +4,10 @@ import { Menu, MenuButton, MenuItem } from "@headlessui/vue";
 import { Icon } from "@iconify/vue";
 import { getCurrentDate, getDateFormat, getISOFormat } from "@/helpers/date";
 import EventService from "@/services/event";
-import AvatarTag from "@/components/calendar/AvatarTag.vue";
+import AvatarTag from "./AvatarTag.vue";
 import HourSelect from "./HourSelect.vue";
-import TagInput from "../TagInput.vue";
-import ColorSet from "../ColorSet.vue";
+import TagInput from "@/components/TagInput.vue";
+import ColorSet from "@/components/ColorSet.vue";
 
 const props = defineProps<{
   data: {

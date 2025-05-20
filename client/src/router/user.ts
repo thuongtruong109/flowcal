@@ -2,7 +2,7 @@ const userRoutes = [
     {
         path: "/auth",
         name: "auth",
-        component: () => import("@/layouts/auth.vue"),
+        component: () => import("@/layouts/default.vue"),
         children: [
             {
                 path: "signup",
@@ -18,30 +18,30 @@ const userRoutes = [
     },
     {
         path: "/",
-        name: "home",
-        component: () => import("@/layouts/user/main.vue"),
+        name: "main",
+        component: () => import("@/layouts/user.vue"),
         children: [
             {
                 path: "projects",
                 name: "projects",
-                component: () => import("@/pages/project/page.vue"),
+                component: () => import("@/pages/user/project/page.vue"),
             },
             {
                 path: "projects/:projectId",
                 name: "projectId",
-                component: () => import("@/pages/project/overview.vue"),
+                component: () => import("@/pages/user/project/detail/page.vue"),
                 children: [
                     {
-                        path: "board/:boardId",
-                        name: "board",
-                        component: () => import("@/pages/project/board.vue"),
+                        path: "boards/:boardId",
+                        name: "boards",
+                        component: () => import("@/pages/user/project/board/page.vue"),
                     },
                 ],
             },
             {
                 path: "events",
                 name: "events",
-                component: () => import("@/pages/event/index.vue"),
+                component: () => import("@/pages/user/event/index.vue"),
             }
         ],
     },

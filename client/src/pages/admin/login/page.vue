@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref, computed } from "vue";
-import AuthForm from "@/components/accessibilities/AuthForm.vue";
+import AuthForm from "@/pages/admin/login/_components/AuthForm.vue";
 
 const payload = reactive({
   username: "",

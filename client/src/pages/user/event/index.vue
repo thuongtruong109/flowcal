@@ -13,13 +13,13 @@ import {
   formatTimeWithPrefixZero,
 } from "@/helpers/date";
 import { truncateString, sliceString } from "@/utils/format";
-import TimeBar from "@/components/calendar/TimeBar.vue";
-import DatePicker from "@/components/calendar/DatePicker.vue";
-import Tooltip from "@/components/calendar/Tooltip.vue";
+import TimeBar from "@/pages/user/event/_components/TimeBar.vue";
+import DatePicker from "@/pages/user/event/_components/DatePicker.vue";
+import Tooltip from "@/pages/user/event/_components/Tooltip.vue";
 import { IEvent } from "@/types";
-import CreateEvent from "@/components/calendar/CreateEvent.vue";
+import CreateEvent from "@/pages/user/event/_components/CreateEvent.vue";
 import EventService from "@/services/event";
-import ScreenShot from "@/components/calendar/ScreenShot.vue";
+import ScreenShot from "@/pages/user/event/_components/ScreenShot.vue";
 
 const screenShot = ref<any>(null);
 const headSize = ref(null);

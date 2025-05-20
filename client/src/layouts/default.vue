@@ -1,10 +1,9 @@
 <script setup>
 import { RouterView } from "vue-router";
-import SignupPage from "@/pages/auth/signup.vue";
 </script>
 
 <template>
-  <main class="auth_layout min-h-screen max-h-screen h-screen overflow-hidden">
+  <main class="auth_layout min-h-screen max-h-screen h-screen overflow-hidden place-content-center">
     <router-view></router-view>
   </main>
 </template>

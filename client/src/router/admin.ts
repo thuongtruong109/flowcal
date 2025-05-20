@@ -6,13 +6,13 @@ const adminRoutes = [
         children: [
         {
             path: "login",
-            name: "login",
-            component: () => import("@/pages/admin/login.vue"),
+            name: "admin-login",
+            component: () => import("@/pages/admin/login/page.vue"),
         },
         {
-            path: "overview",
-            name: "overview",
-            component: () => import("@/pages/admin/index.vue"),
+            path: "dashboard",
+            name: "admin-dashboard",
+            component: () => import("@/pages/admin/dashboard.vue"),
         },
         ],
     },

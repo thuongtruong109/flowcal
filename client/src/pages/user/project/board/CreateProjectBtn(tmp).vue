@@ -60,7 +60,7 @@ const handleCreateProject = async () => {
     categoryId: payload.categoryId,
   });
   closeModal();
-  router.push(`/project/${res.data._id}`);
+  router.push(`/projects/${res.data._id}`);
 };
 </script>
 

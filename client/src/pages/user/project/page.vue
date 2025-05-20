@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { reactive, onMounted, watchEffect } from "vue";
+import { reactive, watchEffect } from "vue";
 import OverView from "@/components/project/OverView.vue";
-import ProjectCard from "@/pages/project/_components/ProjectCard.vue";
+import ProjectCard from "@/pages/user/project/_components/ProjectCard.vue";
 import { projectBoxColors } from "@/shared/color";
-import Sort from "@/pages/project/_components/Sort.vue";
+import Sort from "@/pages/user/project/_components/Sort.vue";
 import ProjectService from "@/services/project";
 import useAuthStore from "@/store/auth";
 import { getIndex } from "@/utils/array";
 import { getCurrentDate } from "@/helpers/date";
 import { Icon } from "@iconify/vue";
-import SearchBox from "@/pages/project/_components/SearchBox.vue";
-import CreateProjectBtn from "@/pages/project/_components/CreateProjectBtn.vue";
+import SearchBox from "@/pages/user/project/_components/SearchBox.vue";
+import CreateProjectBtn from "@/pages/user/project/_components/CreateProjectBtn.vue";
 
 const payload = reactive({
   access: "all",
