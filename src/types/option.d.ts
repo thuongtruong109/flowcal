@@ -1,4 +1,4 @@
-import type Router from "express";
+import type { Router, Request } from "express";
 
 export type IRouter = {
   path?: string;
@@ -16,3 +16,15 @@ export type IDecoded = {
   iat: number;
   exp: number;
 };
+
+export type IRequest = {
+  method: string;
+  userId: string;
+  user: IDecoded;
+  body: any;
+  params: any;
+  query: any;
+  headers: {
+    authorization: string;
+  };
+}

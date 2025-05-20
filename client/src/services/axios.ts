@@ -1,10 +1,11 @@
 import axios, {
-  AxiosError,
+  type AxiosError,
   type AxiosInstance,
   type AxiosRequestConfig,
   type AxiosResponse,
 } from "axios";
 import useAuthStore from "@/store/auth";
+import AuthService from "@/services/auth";
 
 const authStore = useAuthStore();
 
@@ -38,22 +39,17 @@ axiosConfig.interceptors.response.use(
     };
     if (error?.response?.status === 403 && !preRequest?.sent) {
       preRequest.sent = true;
-      const newToken = await axiosConfig.post(
-        "/auth/refresh-token",
-        {
-          refreshToken: authStore.getRefreshToken,
-        },
-        {
-          withCredentials: true,
-        }
-      );
+      const newToken = await AuthService.refreshToken();
       preRequest.headers.Authorization = `Bearer ${newToken.data.accessToken}`;
       localStorage.setItem("token", newToken.data.accessToken);
       localStorage.setItem("refreshToken", newToken.data.refreshToken);
       return axiosConfig(preRequest);
     }
+    if (error?.response?.status === 401) {
+      authStore.logout();
+      return Promise.reject(error);
+    }
     error.response && Promise.reject(error.response);
-
     error.request && Promise.reject(error.request);
 
     return Promise.reject(error.message);

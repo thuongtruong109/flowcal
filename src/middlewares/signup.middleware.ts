@@ -2,16 +2,14 @@ import { ROLE } from "../constants";
 import type { IUser } from "../types";
 import type { Request, Response, NextFunction } from "express";
 import type { Error } from "mongoose";
-import db from "../models";
-
-const User = db.user;
+import { UserModel } from "../models";
 
 const checkDuplicateUsernameOrEmail = (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  User.findOne({
+  UserModel.findOne({
     username: req.body.username,
   }).exec((err: Error | null, user: IUser | any) => {
     if (err) {
@@ -24,7 +22,7 @@ const checkDuplicateUsernameOrEmail = (
       return;
     }
 
-    User.findOne({
+    UserModel.findOne({
       email: req.body.email,
     }).exec((err: Error | null, user: IUser | any) => {
       if (err) {

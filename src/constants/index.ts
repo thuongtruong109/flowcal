@@ -1,14 +1,65 @@
-export const CATEGORY: Array<string> = ["kanban", "todo", "note"];
+import type { ITag } from '../types'
+
+export const ENTITY = {
+    ROLE: "Role",
+    USER: "User",
+    EVENT: "Event",
+    PROJECT: "Project",
+    CATEGORY: "Category",
+    BOARD: "Board",
+    CARD: "Card",
+    TAG: "Tag",
+    STATUS: "Status",
+
+    COLOR: "Color",
+    // TODO: "Todo",
+    // NOTE: "Note",
+};
 
 export const ROLE: Array<string> = ["admin", "user"];
 
-export const TAG: Array<string> = [
-    "family",
-    "work",
-    "study",
-    "hobby",
-    "friend",
-    "secret",
+export const CATEGORY: Array<string> = ["kanban", "todo", "note"];
+
+export const STATUS: Array<string> = [
+    "todo",
+    "doing",
+    "done",
+    "cancelled",
+    "archived",
+    "in-progress",
+    "completed",
+    "pending",
+    "rejected",
+    "failed",
+    "success",
+]
+
+export const TAG: Array<ITag> = [
+    {
+        name: "family",
+        color: "#DDDDDA"
+    },
+    {
+        name: "work",
+        color: "#FFDCA2"
+    },
+    {
+        name: "study",
+        color: "#E4C7B7"
+    },
+    {
+        name: "hobby",
+        color: "#BCE6FF"
+
+    },
+    {
+        name: "friend",
+        color: "#F9E2AE"
+    },
+    {
+        name: "secret",
+        color: "#E8B7D4"
+    }
 ];
 
 export const COLOR: Array<string> = [
@@ -24,14 +75,4 @@ export const COLOR: Array<string> = [
     "#F5CEC7",
 ];
 
-export const ENTITY = {
-    USER: "User",
-    ROLE: "Role",
-    PROJECT: "Project",
-    EVENT: "Event",
-    TAG: "Tag",
-    COLOR: "Color",
-    BOARD: "Board",
-    CATEGORY: "Category",
-    CARD: "Card",
-};
+export const REFRESH_TOKEN = "refreshToken";

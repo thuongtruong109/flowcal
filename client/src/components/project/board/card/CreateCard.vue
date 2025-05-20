@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { Icon } from "@iconify/vue";
-import CardService from "@/services/card.service";
+import CardService from "@/services/card";
 import { getRandomEmoji } from "@/helpers/kanban";
 import { ICard } from "@/types";
 import TagSet from "@/components/project/TagSet.vue";

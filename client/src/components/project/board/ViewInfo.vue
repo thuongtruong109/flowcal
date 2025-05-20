@@ -3,7 +3,7 @@ import { ref, reactive, computed, watch } from "vue";
 import { useRouter } from "vue-router";
 import { Icon } from "@iconify/vue";
 import Modal from "@/components/Modal.vue";
-import BoardService from "@/services/board.service";
+import BoardService from "@/services/board";
 import { IBoardInfoPayget } from "@/types";
 import StaticGroupCard from "@/components/project/StaticGroupCard.vue";
 import { getCurrentDate, getTimeFormat } from "@/helpers/date";

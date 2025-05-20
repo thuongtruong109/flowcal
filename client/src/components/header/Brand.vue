@@ -1,6 +1,5 @@
 <script setup>
 import { useRouter } from "vue-router";
-import Logo from "@/components/header/Logo.vue";
 
 const router = useRouter();
 const backHome = () => router.push({ name: "home" });
@@ -8,22 +7,33 @@ const backHome = () => router.push({ name: "home" });
 
 <template>
   <div class="flex items-center cursor-pointer" @click="backHome">
-    <Logo />
+    <!-- https://img.icons8.com/external-basicons-color-edtgraphics/50/external-Infinite-abstract-basicons-color-edtgraphics.png -->
+    <img
+      src="@/assets/img/metasave_logo.png"
+      alt="logo_img"
+      class="max-w-8 max-h-8"
+    />
     <h1
-      class="text-3xl font-bold mx-5 text-[#2c3591] dark:text-gray-300"
-      style="text-shadow: 1px 1px 1px #888"
+      class="text-3xl font-bold ml-3 drop-shadow-md"
     >
-      Metasave
+      Flowcal
     </h1>
   </div>
 </template>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap');
 h1 {
-  font-family: "Pacifico", cursive;
+  font-family: "Winky Rough", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
   vertical-align: middle;
-  text-shadow: 0px 3px 3px rgba(171, 111, 121, 0.5) !important;
-  letter-spacing: 2px !important;
+  letter-spacing: 1px !important;
+   background: linear-gradient(90deg, #FFC00E, #7CB342);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text; /* For Firefox */
+  color: transparent;
 }
 </style>

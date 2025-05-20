@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import AvatarTag from "./calendar/AvatarTag.vue";
-import SearchUser from "./calendar/SearchUser.vue";
+import AvatarTag from "@/pages/user/event/AvatarTag.vue";
+import SearchUser from "@/pages/user/event/SearchUser.vue";
 import { IUserTag } from "@/types";
 
 const props = defineProps<{

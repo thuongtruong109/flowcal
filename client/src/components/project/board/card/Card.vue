@@ -3,7 +3,7 @@ import { ref, watchEffect } from "vue";
 import useCardStore from "@/store/card";
 import { Draggable } from "vue3-smooth-dnd";
 import { Icon } from "@iconify/vue";
-import CardService from "@/services/card.service";
+import CardService from "@/services/card";
 import SpinLoading from "@/components/icons/SpinLoading.vue";
 import Tag from "@/components/project/board/Tag.vue";
 

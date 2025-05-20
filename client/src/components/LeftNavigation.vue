@@ -8,7 +8,7 @@ const matchRoute = (query: string): boolean =>
 
 const toggles: Array<INav> = [
   {
-    path: "/projects" || "/project/:projectId",
+    path: "/projects",
     width: 42,
     title: "projects",
     img: "/img/project.png",
@@ -36,12 +36,23 @@ const toggles: Array<INav> = [
 const logout = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
-  router.push({ name: "signin" });
+  router.push({ path: "/auth/signin" });
 };
+
+const backHome = () => router.push({ name: "home" });
 </script>
 
 <template>
-  <nav class="flex flex-col items-center justify-center gap-6">
+  <nav class="flex flex-col items-center justify-center space-y-6">
+    <img
+      src="@/assets/img/metasave_logo.png"
+      alt="logo_img"
+      class="max-w-7 max-h-7 cursor-pointer"
+      @click="backHome"
+    />
+
+    <span class="h-px w-full bg-slate-200" />
+
     <router-link
       :to="toggle.path"
       v-for="(toggle, i) in toggles"
@@ -54,7 +65,7 @@ const logout = () => {
         class="cursor-pointer rounded-full p-2"
         :class="
           matchRoute(toggle.path)
-            ? 'bg-purple-200 text-white dark:bg-gray-700 shadow-lg'
+            ? 'bg-white text-white dark:bg-gray-700 shadow-lg border'
             : 'hover:bg-gray-200 hover:shadow-xl'
         "
       >

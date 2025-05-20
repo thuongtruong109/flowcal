@@ -18,6 +18,32 @@ module.exports = {
     "bg-[#34C471]",
     "bg-[#D5DEFF]",
     "bg-[#4067F9]",
+    // text project colors
+    "text-[#FEE4CB]",
+    "text-[#FF942E]",
+    "text-[#E9E7FD]",
+    "text-[#4F3FF0]",
+    "text-[#DBF6FD]",
+    "text-[#096C86]",
+    "text-[#FFD3E2]",
+    "text-[#DF3670]",
+    "text-[#C8F7DC]",
+    "text-[#34C471]",
+    "text-[#D5DEFF]",
+    "text-[#4067F9]",
+    // border project colors
+    "border-[#FEE4CB]",
+    "border-[#FF942E]",
+    "border-[#E9E7FD]",
+    "border-[#4F3FF0]",
+    "border-[#DBF6FD]",
+    "border-[#096C86]",
+    "border-[#FFD3E2]",
+    "border-[#DF3670]",
+    "border-[#C8F7DC]",
+    "border-[#34C471]",
+    "border-[#D5DEFF]",
+    "border-[#4067F9]",
     // event colors
     "bg-[#F5CEC7]",
     "bg-[#FFDCA2]",
@@ -37,6 +63,9 @@ module.exports = {
     extend: {
       colors: {
         primary: colors.purple[500],
+      },
+      screens: {
+        "xs": "480px",
       },
       spacing: {
         "128": "32rem",

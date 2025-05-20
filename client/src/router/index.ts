@@ -1,12 +1,12 @@
-import VueRouter, { createRouter, createWebHistory } from "vue-router";
+import type VueRouter from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import NProgress from "nprogress";
 import useAuthStore from "../store/auth";
-import commonRouter from "./common";
-import authRouter from "./auth";
-import mainrouter from "./main";
-import cdminrouter from "./admin";
+import defaultRoutes from "./default";
+import adminRoutes from "./admin";
+import userRoutes from "./user";
 
-const routes = [...commonRouter, ...authRouter, ...mainrouter, ...cdminrouter];
+const routes = [...defaultRoutes, ...userRoutes, ...adminRoutes];
 
 const router = createRouter({
   history: createWebHistory(),

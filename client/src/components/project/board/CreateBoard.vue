@@ -3,7 +3,7 @@ import { ref, reactive, computed } from "vue";
 import { useRouter } from "vue-router";
 import { Icon } from "@iconify/vue";
 import Modal from "@/components/Modal.vue";
-import BoardService from "@/services/board.service";
+import BoardService from "@/services/board";
 import ColorSet from "@/components/ColorSet.vue";
 
 const router = useRouter();

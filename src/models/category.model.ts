@@ -1,22 +1,20 @@
 import mongoose from "mongoose";
 import { ENTITY } from "../constants";
 
-interface IColorModel extends mongoose.Document {
-  name: string;
-}
-
-const CategorySchema = new mongoose.Schema({
+const categorySchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
     unique: true,
     max: 10,
   },
+  __v: { type: Number, select: false },
 });
 
-const CategoryModel = mongoose.model<IColorModel>(
+type ICategoryModel = mongoose.InferSchemaType<typeof categorySchema> & Document;
+const CategoryModel = mongoose.model<ICategoryModel>(
   ENTITY.CATEGORY,
-  CategorySchema
+  categorySchema
 );
 
 export default CategoryModel;

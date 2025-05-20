@@ -30,7 +30,7 @@ defineEmits<{
           leave-from="opacity-100"
           leave-to="opacity-0"
         >
-          <div class="fixed inset-0 bg-black bg-opacity-25" />
+          <div class="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm" />
         </TransitionChild>
 
         <div class="fixed inset-0 overflow-y-auto">
@@ -47,11 +47,11 @@ defineEmits<{
               leave-to="opacity-0 scale-90"
             >
               <DialogPanel
-                class="w-max transform origin-top overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
+                class="w-max transform origin-top overflow-hidden rounded-2xl bg-white p-4 text-left align-middle shadow-xl transition-all"
               >
                 <DialogTitle
                   as="h3"
-                  class="text-lg font-medium leading-6 text-gray-900 flex justify-between items-center"
+                  class="text-lg font-medium leading-6 text-gray-900 flex justify-between items-center mb-4"
                 >
                   <slot name="title"></slot>
                   <slot name="closeBtn"></slot>
